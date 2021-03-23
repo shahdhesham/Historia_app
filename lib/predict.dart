@@ -144,10 +144,10 @@ class _PredictState extends State<Predict> {
             color: Colors.black, //change your color here
           ),
           title: Text(
-            "Flutter x TF-Lite",
+            "Detection",
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.black,
           centerTitle: true,
         ),
         body: ListView(

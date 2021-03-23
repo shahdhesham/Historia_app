@@ -41,9 +41,9 @@ class _UserHomeState extends State<UserHome> {
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              (imageUrl != null)
-                  ? Image.network(imageUrl)
-                  : Image.network('https://i.imgur.com/sUFH1Aq.png'),
+              // (imageUrl != null)
+              //     ? Image.network(imageUrl)
+              //     : Image.network('https://i.imgur.com/sUFH1Aq.png'),
 
               Container(
                 child: Padding(
@@ -85,7 +85,7 @@ class _UserHomeState extends State<UserHome> {
                       primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
                     onPressed: () {
-                      uploadImage();
+                      Navigator.pushNamed(context, 'predict');
                     },
                     child: Text(
                       'Upload Offline',
@@ -132,36 +132,36 @@ class _UserHomeState extends State<UserHome> {
     );
   }
 
-  uploadImage() async {
-    final _firebaseStorage = FirebaseStorage.instance;
-    final _imagePicker = ImagePicker();
-    PickedFile image;
-    //Check Permissions
-    await Permission.photos.request();
+  // uploadImage() async {
+  //   final _firebaseStorage = FirebaseStorage.instance;
+  //   final _imagePicker = ImagePicker();
+  //   PickedFile image;
+  //   //Check Permissions
+  //   await Permission.photos.request();
 
-    var permissionStatus = await Permission.photos.status;
+  //   var permissionStatus = await Permission.photos.status;
 
-    if (permissionStatus.isGranted) {
-      //Select Image
-      image = await _imagePicker.getImage(source: ImageSource.gallery);
-      var file = File(image.path);
+  //   if (permissionStatus.isGranted) {
+  //     //Select Image
+  //     image = await _imagePicker.getImage(source: ImageSource.gallery);
+  //     var file = File(image.path);
 
-      if (image != null) {
-        //Upload to Firebase
-        var snapshot = await _firebaseStorage
-            .ref()
-            .child('images/imageName')
-            .putFile(file)
-            .onComplete;
-        var downloadUrl = await snapshot.ref.getDownloadURL();
-        setState(() {
-          imageUrl = downloadUrl;
-        });
-      } else {
-        print('No Image Path Received');
-      }
-    } else {
-      print('Permission not granted. Try Again with permission access');
-    }
-  }
+  //     if (image != null) {
+  //       //Upload to Firebase
+  //       var snapshot = await _firebaseStorage
+  //           .ref()
+  //           .child('images/imageName')
+  //           .putFile(file)
+  //           .onComplete;
+  //       var downloadUrl = await snapshot.ref.getDownloadURL();
+  //       setState(() {
+  //         imageUrl = downloadUrl;
+  //       });
+  //     } else {
+  //       print('No Image Path Received');
+  //     }
+  //   } else {
+  //     print('Permission not granted. Try Again with permission access');
+  //   }
+  // }
 }

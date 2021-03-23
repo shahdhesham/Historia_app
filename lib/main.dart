@@ -4,6 +4,7 @@ import 'package:ui_gp/HomePage.dart';
 import 'package:ui_gp/SignIn.dart';
 import 'package:ui_gp/SignUp.dart';
 import 'package:ui_gp/User_home.dart';
+import 'package:ui_gp/predict.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         'signin': (context) => SignIn(),
         'forgetpass': (context) => ForgetPassword(),
         'userhome': (context) => UserHome(),
+        'predict': (context) => Predict(),
       },
     );
   }
