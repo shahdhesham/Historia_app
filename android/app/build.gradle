@@ -54,10 +54,10 @@ android {
     }
 }
 
-aaptOptions {
-    noCompress 'tflite'
-    noCompress 'lite'
-}
+// aaptOptions {
+//     noCompress 'tflite'
+//     noCompress 'lite'
+// }
 
 
 

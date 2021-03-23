@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Transform.translate(
-              offset: Offset(1, 311.0),
+              offset: Offset(1, 200.0),
               child: InkWell(
                 child: Text(
                   'Continue without signing in',
