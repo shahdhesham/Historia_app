@@ -2,18 +2,18 @@
 
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
-class User_home extends StatefulWidget {
+class UserHome extends StatefulWidget {
   @override
-  _User_homeState createState() => _User_homeState();
+  _UserHomeState createState() => _UserHomeState();
 }
 
-class _User_homeState extends State<User_home> {
-    String imageUrl;
+class _UserHomeState extends State<UserHome> {
+  String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +40,10 @@ class _User_homeState extends State<User_home> {
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-               (imageUrl != null)
-                    ? Image.network(imageUrl)
-                    : Image.network('https://i.imgur.com/sUFH1Aq.png'),
-          
+              (imageUrl != null)
+                  ? Image.network(imageUrl)
+                  : Image.network('https://i.imgur.com/sUFH1Aq.png'),
+
               Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -79,15 +79,12 @@ class _User_homeState extends State<User_home> {
                 child: Container(
                   width: 200.0,
                   height: 60,
-                  
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
-                    
                     onPressed: () {
-                                      uploadImage();
-
+                      uploadImage();
                     },
                     child: Text(
                       'Upload Offline',
@@ -133,12 +130,11 @@ class _User_homeState extends State<User_home> {
       ),
     );
   }
-  
+
   uploadImage() async {
     final _firebaseStorage = FirebaseStorage.instance;
     final _imagePicker = ImagePicker();
-    PickedFile image = await _imagePicker.getImage(source: ImageSource.gallery);
-    File _file;
+    PickedFile image;
     //Check Permissions
     await Permission.photos.request();
 
@@ -146,15 +142,16 @@ class _User_homeState extends State<User_home> {
 
     if (permissionStatus.isGranted) {
       //Select Image
-      _file = File(image.path);
+      image = await _imagePicker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
 
       if (image != null) {
         //Upload to Firebase
         var snapshot = await _firebaseStorage
             .ref()
             .child('images/imageName')
-            .putFile(_file);
-            // .onComplete;
+            .putFile(file)
+            .onComplete;
         var downloadUrl = await snapshot.ref.getDownloadURL();
         setState(() {
           imageUrl = downloadUrl;
@@ -167,5 +164,3 @@ class _User_homeState extends State<User_home> {
     }
   }
 }
-
-

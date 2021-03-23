@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 class SignUP extends StatefulWidget {
+  static const routeName = 'signup';
   @override
   _SignUPState createState() => _SignUPState();
 }
@@ -30,20 +31,20 @@ class _SignUPState extends State<SignUP> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                     Text(
-                'Crate Account',
-                style: TextStyle(
-                  fontFamily: 'Antens',
-                  fontSize: 86,
-                  color: const Color(0xffffffff),
+                Text(
+                  'Create Account',
+                  style: TextStyle(
+                    fontFamily: 'Antens',
+                    fontSize: 86,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor:Colors.white.withOpacity(0.75),
+                        fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
                             EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -65,7 +66,7 @@ class _SignUPState extends State<SignUP> {
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor:Colors.white.withOpacity(0.75),
+                        fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
                             EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -87,7 +88,7 @@ class _SignUPState extends State<SignUP> {
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor:Colors.white.withOpacity(0.75),
+                        fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
                             EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -109,7 +110,7 @@ class _SignUPState extends State<SignUP> {
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor:Colors.white.withOpacity(0.75),
+                        fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
                             EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -131,7 +132,7 @@ class _SignUPState extends State<SignUP> {
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor:Colors.white.withOpacity(0.75),
+                        fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
                             EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -150,12 +151,12 @@ class _SignUPState extends State<SignUP> {
                   ),
                 ),
                 SizedBox(
-                    width: 500.0,
-              height: 100.0,
+                  width: 500.0,
+                  height: 100.0,
                   child: Center(
                     child: Container(
-                       width: 250.0,
-                height: 60,
+                      width: 250.0,
+                      height: 60,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Color.fromRGBO(255, 228, 181, 0.89),
@@ -168,27 +169,26 @@ class _SignUPState extends State<SignUP> {
                     ),
                   ),
                 ),
-                    InkWell(
-                          child: SizedBox(
-                            width: 500.0,
-              height: 100.0,
-                            child: Center(
-                              child: Text(
-                                
-                'Already Have an Account?',
-                style: TextStyle(
-                  fontFamily: 'Calibri',
-                  fontSize: 12,
-                  color: const Color(0xffe9e9e9),
-                  decoration: TextDecoration.underline,
+                InkWell(
+                  child: SizedBox(
+                    width: 500.0,
+                    height: 100.0,
+                    child: Center(
+                      child: Text(
+                        'Already Have an Account?',
+                        style: TextStyle(
+                          fontFamily: 'Calibri',
+                          fontSize: 12,
+                          color: const Color(0xffe9e9e9),
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, 'signin');
+                  },
                 ),
-
-              ),
-                            ),
-                          ),
-              onTap:(){} ,
-            ), 
-            
               ])),
         )),
       ),

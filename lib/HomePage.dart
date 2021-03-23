@@ -66,7 +66,9 @@ class _HomePageState extends State<HomePage> {
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'signup');
+                    },
                     child: Text(
                       'Create an account',
                     ),
@@ -81,30 +83,32 @@ class _HomePageState extends State<HomePage> {
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromRGBO(255, 228, 181, 0.89),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'signin');
+                  },
                   child: Text(
                     'Sign In',
                   ),
                 ),
               ),
             ),
-             Transform.translate(
+            Transform.translate(
               offset: Offset(1, 311.0),
-              child:
-            InkWell(
-                          child: Text(
-                'Continue without signing in',
-                style: TextStyle(
-                  fontFamily: 'Calibri',
-                  fontSize: 12,
-                  color: const Color(0xffe9e9e9),
-                  decoration: TextDecoration.underline,
+              child: InkWell(
+                child: Text(
+                  'Continue without signing in',
+                  style: TextStyle(
+                    fontFamily: 'Calibri',
+                    fontSize: 12,
+                    color: const Color(0xffe9e9e9),
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
-               
+                onTap: () {
+                  Navigator.pushNamed(context, 'signin');
+                },
               ),
-              onTap:(){} ,
             ),
-             ),
           ],
         )),
       ),

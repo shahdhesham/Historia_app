@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 class ForgetPassword extends StatefulWidget {
+  static const routeName = 'forgetpass';
   @override
   _ForgetPasswordState createState() => _ForgetPasswordState();
 }
@@ -30,33 +31,33 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                     Padding(
-                       padding: const EdgeInsets.all(5),
-                       child: Text(
-                'Password Reset',
-                style: TextStyle(
-                  fontFamily: 'Antens',
-                  fontSize: 86,
-                  color: const Color(0xffffffff),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    'Password Reset',
+                    style: TextStyle(
+                      fontFamily: 'Antens',
+                      fontSize: 86,
+                      color: const Color(0xffffffff),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-                     ),
-              //     Text(
-              //   'Enter Your email below and we will send you email to help reset the password',
-              //   style: TextStyle(
-              //     fontFamily: 'calibri',
-              //     fontSize: 20,
-              //     color: const Color(0xffffffff),
-              //   ),
-              //   textAlign: TextAlign.center,
-              // ),
-                
+                //     Text(
+                //   'Enter Your email below and we will send you email to help reset the password',
+                //   style: TextStyle(
+                //     fontFamily: 'calibri',
+                //     fontSize: 20,
+                //     color: const Color(0xffffffff),
+                //   ),
+                //   textAlign: TextAlign.center,
+                // ),
+
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        fillColor:Colors.white.withOpacity(0.75),
+                        fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
                             EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -74,15 +75,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     onSaved: (value) {},
                   ),
                 ),
-                
-              
+
                 SizedBox(
-                    width: 500.0,
-              height: 100.0,
+                  width: 500.0,
+                  height: 100.0,
                   child: Center(
                     child: Container(
-                       width: 250.0,
-                height: 60,
+                      width: 250.0,
+                      height: 60,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Color.fromRGBO(255, 228, 181, 0.89),
@@ -95,8 +95,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     ),
                   ),
                 ),
-                 
-            
               ])),
         )),
       ),

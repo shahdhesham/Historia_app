@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ui_gp/ForgetPassword.dart';
 import 'package:ui_gp/HomePage.dart';
+import 'package:ui_gp/SignIn.dart';
 import 'package:ui_gp/SignUp.dart';
 import 'package:ui_gp/User_home.dart';
 
@@ -10,16 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-     theme: ThemeData(
-        primarySwatch: Colors.black,
+    return MaterialApp(
+      theme: new ThemeData(
+        primaryColor: Colors.black,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: 
-     // User_home(),
-      HomePage(),
+      home: UserHome(),
+      //HomePage(),
       routes: {
-      
+        'signup': (context) => SignUP(),
+        'signin': (context) => SignIn(),
+        'forgetpass': (context) => ForgetPassword(),
       },
     );
   }
