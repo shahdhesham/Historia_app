@@ -20,8 +20,8 @@ class _PredictState extends State<Predict> {
     try {
       String res;
       res = await Tflite.loadModel(
-        model: "assets/mobilenet.tflite",
-        labels: "assets/labels.txt",
+        model: "assets/Egypt.tflite",
+        labels: "assets/Egypt_label.txt",
       );
       print(res);
     } on PlatformException {
@@ -31,6 +31,7 @@ class _PredictState extends State<Predict> {
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
+    print("predict");
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
         imageMean: 0.0, // defaults to 117.0
@@ -50,6 +51,7 @@ class _PredictState extends State<Predict> {
   // send image to predict method selected from gallery or camera
   sendImage(File image) async {
     if (image == null) return;
+    print("object");
     await predict(image);
 
     // get the width and height of selected image
@@ -66,10 +68,13 @@ class _PredictState extends State<Predict> {
 
   // select image from gallery
   selectFromGallery() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final picker = ImagePicker();
+    PickedFile image = await picker.getImage(source: ImageSource.gallery);
     if (image == null) return;
     setState(() {});
-    sendImage(image);
+    _image = File(image.path);
+    sendImage(_image);
+    print("here");
   }
 
   // select image from camera
@@ -104,7 +109,8 @@ class _PredictState extends State<Predict> {
       child: Center(
         child: Text(
           "Prediction: " + _recognitions[0]['label'].toString().toUpperCase(),
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          style: TextStyle(
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
         ),
       ),
     );
