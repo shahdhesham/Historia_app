@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: UserHome(),
-      //HomePage(),
+      home: HomePage(),
       routes: {
         'signup': (context) => SignUP(),
         'signin': (context) => SignIn(),
         'forgetpass': (context) => ForgetPassword(),
+        'userhome': (context) => UserHome(),
       },
     );
   }

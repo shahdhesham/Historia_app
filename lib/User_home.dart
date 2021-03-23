@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class UserHome extends StatefulWidget {
+  static const routeName = 'userhome';
   @override
   _UserHomeState createState() => _UserHomeState();
 }
