@@ -42,6 +42,7 @@ class _PredictState extends State<Predict> {
         );
 
     print(recognitions);
+    print("above are recognitions");
 
     setState(() {
       _recognitions = recognitions;
