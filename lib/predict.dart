@@ -31,17 +31,20 @@ class _PredictState extends State<Predict> {
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
+    print("//////////////////////////////////////////////");
     print("predict");
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
-        imageMean: 0.0, // defaults to 117.0
-        imageStd: 255.0, // defaults to 1.0
-        numResults: 2, // defaults to 5
-        threshold: 0.2, // defaults to 0.1
+        imageMean: 224, // defaults to 117.0
+        imageStd: 1.0, // defaults to 1.0
+        numResults: 4, // defaults to 5
+        threshold: 0.005, // defaults to 0.1
         asynch: true // defaults to true
         );
+            print("//////////////////////////////////////////////");
 
     print(recognitions);
+    print("//////////////////////////////////////////////");
 
     setState(() {
       _recognitions = recognitions;
@@ -103,7 +106,8 @@ class _PredictState extends State<Predict> {
         child: Text("Could not recognize",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
-    }
+    }        print(_recognitions);
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Center(
