@@ -57,25 +57,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Transform.translate(
-                offset: Offset(1, 295.0),
-                child: Container(
-                  width: 200.0,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 0.89),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'signup');
-                    },
-                    child: Text(
-                      'Create an account',
-                    ),
+            Padding(
+              padding: const EdgeInsets.only(top: 200),
+              child: Container(
+                width: 200.0,
+                height: 60,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(255, 228, 181, 0.89),
                   ),
-                )),
-            Transform.translate(
-              offset: Offset(1, 305.0),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'signup');
+                  },
+                  child: Text(
+                    'Create an account',
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: 200.0,
                 height: 60,
@@ -92,8 +93,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Transform.translate(
-              offset: Offset(1, 200.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 child: Text(
                   'Continue without signing in',
