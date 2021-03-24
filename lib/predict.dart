@@ -120,6 +120,40 @@ class _PredictState extends State<Predict> {
     );
   }
 
+
+  List<Widget> renderBoxes(Size screen) {
+    if (_recognitions == null) return [];
+    if (_imageWidth == null || _imageHeight == null) return [];
+
+    double factorX = screen.width;
+    double factorY = _imageHeight / _imageHeight * screen.width;
+
+    Color blue = Colors.red;
+
+    return _recognitions.map((re) {
+      return Positioned(
+        left: re["rect"]["x"] * factorX,
+        top: re["rect"]["y"] * factorY,
+        width: re["rect"]["w"] * factorX,
+        height: re["rect"]["h"] * factorY,
+        child: ((re["confidenceInClass"] > 0.50))? Container(
+          decoration: BoxDecoration(
+              border: Border.all(
+            color: blue,
+            width: 3,
+          )),
+          child: Text(
+            "${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%",
+            style: TextStyle(
+              background: Paint()..color = blue,
+              color: Colors.white,
+              fontSize: 15,
+            ),
+          ),
+        ) : Container()
+     );
+    }).toList();
+  }
   @override
   Widget build(BuildContext context) {
     // get the width and height of current screen the app is running on
