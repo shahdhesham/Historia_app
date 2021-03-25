@@ -15,16 +15,17 @@ class ImageItem extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.images}) : super(key: key);
+class Video extends StatefulWidget {
+    static const routeName = 'video';
+  Video({Key key, this.images}) : super(key: key);
 
   final List<Image> images;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _VideoState createState() => _VideoState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _VideoState extends State<Video> {
   var _isClean = false;
   Future _getImages() async {
     ImagePicker picker = ImagePicker();

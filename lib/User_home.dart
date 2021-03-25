@@ -69,8 +69,7 @@ class _UserHomeState extends State<UserHome> {
                       primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
                     onPressed: () {
-                                            Navigator.pushNamed(context, 'scann');
-
+                      Navigator.pushNamed(context, 'scann');
                     },
                     child: Text(
                       'Start Scanning',
@@ -124,6 +123,25 @@ class _UserHomeState extends State<UserHome> {
                     onPressed: () {},
                     child: Text(
                       'My History ',
+                    ),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Container(
+                  width: 200.0,
+                  height: 60,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromRGBO(255, 228, 181, 0.89),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'video');
+                    },
+                    child: Text(
+                      'Video Splitting ',
                     ),
                   ),
                 ),

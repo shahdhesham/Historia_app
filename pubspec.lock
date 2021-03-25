@@ -21,7 +21,7 @@ packages:
       name: boolean_selector
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0-nullsafety.1"
+    version: "2.1.0"
   camera:
     dependency: "direct main"
     description:
@@ -214,7 +214,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.0"
-    version: "1.9.2"
   percent_indicator:
     dependency: "direct main"
     description:
@@ -283,7 +282,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-    version: "2.1.0-nullsafety.1"
   stream_transform:
     dependency: transitive
     description:
@@ -341,5 +339,5 @@ packages:
     source: hosted
     version: "4.5.1"
 sdks:
-  dart: ">=2.10.0-110 <2.11.0"
-  flutter: ">=1.22.0 <2.0.0"
+  dart: ">=2.12.0-0.0 <3.0.0"
+  flutter: ">=1.22.0"

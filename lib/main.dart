@@ -8,7 +8,6 @@ import 'package:ui_gp/predict.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -21,14 +20,15 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(images: <Image>[]),
+      home: HomePage(),
       routes: {
         'signup': (context) => SignUP(),
         'signin': (context) => SignIn(),
         'forgetpass': (context) => ForgetPassword(),
         'userhome': (context) => UserHome(),
         'predict': (context) => Predict(),
-        'scann':(context)=>DetectScreen(title: 'Detect Room Color'),
+        'scann': (context) => DetectScreen(title: 'Detect Room Color'),
+        'video': (context) => Video(images: <Image>[]),
       },
     );
   }
