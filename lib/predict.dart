@@ -41,7 +41,7 @@ class _PredictState extends State<Predict> {
         threshold: 0.005, // defaults to 0.1
         asynch: true // defaults to true
         );
-            print("//////////////////////////////////////////////");
+    print("//////////////////////////////////////////////");
 
     print(recognitions);
     print("//////////////////////////////////////////////");
@@ -106,7 +106,8 @@ class _PredictState extends State<Predict> {
         child: Text("Could not recognize",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
-    }        print(_recognitions);
+    }
+    print(_recognitions);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
