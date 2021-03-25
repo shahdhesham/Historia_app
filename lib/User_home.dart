@@ -68,7 +68,10 @@ class _UserHomeState extends State<UserHome> {
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                                            Navigator.pushNamed(context, 'scann');
+
+                    },
                     child: Text(
                       'Start Scanning',
                     ),
