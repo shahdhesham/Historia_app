@@ -5,6 +5,8 @@ import 'package:ui_gp/SignIn.dart';
 import 'package:ui_gp/SignUp.dart';
 import 'package:ui_gp/User_home.dart';
 import 'package:ui_gp/predict.dart';
+import 'package:ui_gp/scann.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         'forgetpass': (context) => ForgetPassword(),
         'userhome': (context) => UserHome(),
         'predict': (context) => Predict(),
+        'scann':(context)=>DetectScreen(title: 'Detect Room Color'),
       },
     );
   }
