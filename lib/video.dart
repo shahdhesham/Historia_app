@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:export_video_frame/export_video_frame.dart';
+import 'package:flutter/services.dart';
+import 'package:starflut/starflut.dart';
+
 
 class ImageItem extends StatelessWidget {
   ImageItem({this.image}) : super(key: ObjectKey(image));
@@ -26,6 +29,12 @@ class Video extends StatefulWidget {
 }
 
 class _VideoState extends State<Video> {
+  String _platformVersion = 'Unknown';
+  @override
+  void initState() {
+    super.initState();
+    
+  }
   var _isClean = false;
   Future _getImages() async {
     ImagePicker picker = ImagePicker();
@@ -40,6 +49,9 @@ class _VideoState extends State<Video> {
 
   Future _getImagesByDuration() async {
     var file = await ImagePicker.pickVideo(source: ImageSource.gallery);
+    initPlatformState(
+      file
+    );
     var duration = Duration(seconds: 30);
     var image =
         await ExportVideoFrame.exportImageBySeconds(file, duration, pi / 2);
@@ -73,7 +85,69 @@ class _VideoState extends State<Video> {
       await _getImagesByDuration();
     }
   }
+ Future<void> initPlatformState(video) async {
+    String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      StarCoreFactory starcore = await Starflut.getFactory();
+      StarServiceClass Service = await starcore.initSimple("test", "123", 0, 0, []);
+      await starcore
+          .regMsgCallBackP((int serviceGroupID, int uMsg, Object wParam, Object lParam) async {
+        print("$serviceGroupID  $uMsg   $wParam   $lParam");
 
+        return null;
+      });
+      StarSrvGroupClass SrvGroup = await Service["_ServiceGroup"];
+
+      /*---script python--*/
+      bool isAndroid = await Starflut.isAndroid();
+      if (isAndroid == true) {
+        await Starflut.copyFileFromAssets(
+            "testcallback.py", "starfiles", "flutter_assets/starfiles");
+        await Starflut.copyFileFromAssets(
+            "testpy.py", "starfiles", "flutter_assets/starfiles");
+        await Starflut.copyFileFromAssets(
+            "python3.6.zip", "starfiles", null); //desRelatePath must be null
+        await Starflut.copyFileFromAssets("zlib.cpython-36m.so", null, null);
+        await Starflut.copyFileFromAssets("unicodedata.cpython-36m.so", null, null);
+        await Starflut.loadLibrary("libpython3.6m.so");
+      }
+
+      String docPath = await Starflut.getDocumentPath();
+      print("docPath = $docPath");
+      String resPath = await Starflut.getResourcePath();
+      print("resPath = $resPath");
+      dynamic rr1 = await SrvGroup.initRaw("python36", Service);
+
+      print("initRaw = $rr1");
+
+      var Result = await SrvGroup.loadRawModule(
+          "python", "", resPath + "starfiles/" + "testpy.py", false);
+      print("loadRawModule = $Result");
+      dynamic python = await Service.importRawContext("python", "", "",false, "");
+      print("python = " + await python.getString());
+      StarObjectClass retobj = await python.call("predict", ['$video']);
+      print(await retobj[0]);
+      print(await retobj[1]);
+      print(await python["g1"]);
+      await SrvGroup.clearService();
+      await starcore.moduleExit();
+      platformVersion = 'Python 3.6';
+    } on PlatformException catch (e) {
+      print("{$e.message}");
+      platformVersion = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+
+    if (!mounted) return;
+
+    setState(() {
+      _platformVersion = platformVersion;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
