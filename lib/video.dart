@@ -16,7 +16,7 @@ class ImageItem extends StatelessWidget {
 }
 
 class Video extends StatefulWidget {
-    static const routeName = 'video';
+  static const routeName = 'video';
   Video({Key key, this.images}) : super(key: key);
 
   final List<Image> images;
@@ -30,17 +30,7 @@ class _VideoState extends State<Video> {
   Future _getImages() async {
     ImagePicker picker = ImagePicker();
     var file = await picker.getVideo(source: ImageSource.gallery);
-    var images = await ExportVideoFrame.exportImage(file.path, 10, 0);
-    var result = images.map((file) => Image.file(file)).toList();
-    setState(() {
-      widget.images.addAll(result);
-      _isClean = true;
-    });
-  }
-
-  Future _getGifImages() async {
-    var file = await ImagePicker.pickImage(source: ImageSource.gallery);
-    var images = await ExportVideoFrame.exportGifImage(file.path, 0);
+    var images = await ExportVideoFrame.exportImage(file.path, 3, 0);
     var result = images.map((file) => Image.file(file)).toList();
     setState(() {
       widget.images.addAll(result);
@@ -49,19 +39,14 @@ class _VideoState extends State<Video> {
   }
 
   Future _getImagesByDuration() async {
-    ImagePicker picker = ImagePicker();
     var file = await ImagePicker.pickVideo(source: ImageSource.gallery);
-    var duration = Duration(seconds: 1);
+    var duration = Duration(seconds: 30);
     var image =
         await ExportVideoFrame.exportImageBySeconds(file, duration, pi / 2);
     setState(() {
       widget.images.add(Image.file(image));
       _isClean = true;
     });
-    await ExportVideoFrame.saveImage(image, "Video Export Demo",
-        waterMark: "images/water_mark.png",
-        alignment: Alignment.bottomLeft,
-        scale: 2.0);
   }
 
   Future _cleanCache() async {
@@ -89,14 +74,6 @@ class _VideoState extends State<Video> {
     }
   }
 
-  Future _handleClickThird() async {
-    if (_isClean) {
-      await _cleanCache();
-    } else {
-      await _getGifImages();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,8 +90,8 @@ class _VideoState extends State<Video> {
                   maxCrossAxisExtent: 400,
                   childAspectRatio: 1.0,
                   padding: const EdgeInsets.all(4),
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 1,
+                  crossAxisSpacing: 1,
                   children: widget.images.length > 0
                       ? widget.images
                           .map((image) => ImageItem(image: image))
@@ -132,7 +109,7 @@ class _VideoState extends State<Video> {
                     _handleClickFirst();
                   },
                   color: Colors.orange,
-                  child: Text(_isClean ? "Clean" : "Export image list"),
+                  child: Text("Export image list"),
                 ),
               ),
             ),
@@ -144,25 +121,10 @@ class _VideoState extends State<Video> {
                   height: 40,
                   minWidth: 150,
                   onPressed: () {
-                     _handleClickSecond();
+                    _handleClickSecond();
                   },
                   color: Colors.orange,
-                  child: Text(_isClean ? "Clean" : "Export one image and save"),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 0,
-              child: Center(
-                child: MaterialButton(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  height: 40,
-                  minWidth: 150,
-                  onPressed: () {
-                     _handleClickThird();
-                  },
-                  color: Colors.orange,
-                  child: Text(_isClean ? "Clean" : "Export gif image"),
+                  child: Text("Export one image and save"),
                 ),
               ),
             ),
