@@ -48,14 +48,16 @@ class _VideoState extends State<Video> {
 
   Future _getImagesByDuration() async {
     var file = await ImagePicker.pickVideo(source: ImageSource.gallery);
-    initPlatformState(file);
+    var predicted = await initPlatformState(file);
+
     var duration = Duration(seconds: 30);
     var image =
         await ExportVideoFrame.exportImageBySeconds(file, duration, pi / 2);
-    setState(() {
-      widget.images.add(Image.file(image));
-      _isClean = true;
-    });
+    // setState(() {
+
+    //   widget.images.add(Image.file(image));
+    //   _isClean = true;
+    // });
   }
 
   Future _cleanCache() async {
@@ -84,6 +86,7 @@ class _VideoState extends State<Video> {
   }
 
   Future<void> initPlatformState(video) async {
+    print("heree");
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -182,7 +185,7 @@ class _VideoState extends State<Video> {
                   height: 40,
                   minWidth: 100,
                   onPressed: () {
-                    _handleClickFirst();
+                    _getImagesByDuration();
                   },
                   color: Colors.orange,
                   child: Text("Export image list"),
