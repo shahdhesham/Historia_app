@@ -7,7 +7,6 @@ import 'package:export_video_frame/export_video_frame.dart';
 import 'package:flutter/services.dart';
 import 'package:starflut/starflut.dart';
 
-
 class ImageItem extends StatelessWidget {
   ImageItem({this.image}) : super(key: ObjectKey(image));
   final Image image;
@@ -33,8 +32,8 @@ class _VideoState extends State<Video> {
   @override
   void initState() {
     super.initState();
-    
   }
+
   var _isClean = false;
   Future _getImages() async {
     ImagePicker picker = ImagePicker();
@@ -49,9 +48,7 @@ class _VideoState extends State<Video> {
 
   Future _getImagesByDuration() async {
     var file = await ImagePicker.pickVideo(source: ImageSource.gallery);
-    initPlatformState(
-      file
-    );
+    initPlatformState(file);
     var duration = Duration(seconds: 30);
     var image =
         await ExportVideoFrame.exportImageBySeconds(file, duration, pi / 2);
@@ -85,14 +82,16 @@ class _VideoState extends State<Video> {
       await _getImagesByDuration();
     }
   }
- Future<void> initPlatformState(video) async {
+
+  Future<void> initPlatformState(video) async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       StarCoreFactory starcore = await Starflut.getFactory();
-      StarServiceClass Service = await starcore.initSimple("test", "123", 0, 0, []);
-      await starcore
-          .regMsgCallBackP((int serviceGroupID, int uMsg, Object wParam, Object lParam) async {
+      StarServiceClass Service =
+          await starcore.initSimple("test", "123", 0, 0, []);
+      await starcore.regMsgCallBackP(
+          (int serviceGroupID, int uMsg, Object wParam, Object lParam) async {
         print("$serviceGroupID  $uMsg   $wParam   $lParam");
 
         return null;
@@ -109,7 +108,8 @@ class _VideoState extends State<Video> {
         await Starflut.copyFileFromAssets(
             "python3.6.zip", "starfiles", null); //desRelatePath must be null
         await Starflut.copyFileFromAssets("zlib.cpython-36m.so", null, null);
-        await Starflut.copyFileFromAssets("unicodedata.cpython-36m.so", null, null);
+        await Starflut.copyFileFromAssets(
+            "unicodedata.cpython-36m.so", null, null);
         await Starflut.loadLibrary("libpython3.6m.so");
       }
 
@@ -122,9 +122,10 @@ class _VideoState extends State<Video> {
       print("initRaw = $rr1");
 
       var Result = await SrvGroup.loadRawModule(
-          "python", "", resPath + "starfiles/" + "testpy.py", false);
+          "python", "", resPath + "starfiles/" + "predict.py", false);
       print("loadRawModule = $Result");
-      dynamic python = await Service.importRawContext("python", "", "",false, "");
+      dynamic python =
+          await Service.importRawContext("python", "", "", false, "");
       print("python = " + await python.getString());
       StarObjectClass retobj = await python.call("predict", ['$video']);
       print(await retobj[0]);
@@ -148,6 +149,7 @@ class _VideoState extends State<Video> {
       _platformVersion = platformVersion;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
