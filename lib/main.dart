@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         'forgetpass': (context) => ForgetPassword(),
         'userhome': (context) => UserHome(),
         'predict': (context) => Predict(),
-        'scann': (context) => DetectScreen(title: 'Detect Room Color'),
+        'scann': (context) => DetectScreen(title: 'Detect Monument'),
         'video': (context) => Video(images: <Image>[]),
       },
     );
