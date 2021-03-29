@@ -49,7 +49,7 @@ class _VideoState extends State<Video> {
   Future _getImagesByDuration() async {
     var file = await ImagePicker.pickVideo(source: ImageSource.gallery);
     var predicted = await initPlatformState(file);
-
+    print('heree');
     var duration = Duration(seconds: 30);
     var image =
         await ExportVideoFrame.exportImageBySeconds(file, duration, pi / 2);
@@ -85,8 +85,7 @@ class _VideoState extends State<Video> {
     }
   }
 
-  Future<void> initPlatformState(video) async {
-    print("heree");
+  Future<void> initPlatformState(toBePredicted) async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -104,12 +103,12 @@ class _VideoState extends State<Video> {
       /*---script python--*/
       bool isAndroid = await Starflut.isAndroid();
       if (isAndroid == true) {
-        await Starflut.copyFileFromAssets(
-            "testcallback.py", "starfiles", "flutter_assets/starfiles");
-        await Starflut.copyFileFromAssets(
-            "testpy.py", "starfiles", "flutter_assets/starfiles");
-        await Starflut.copyFileFromAssets(
-            "python3.6.zip", "starfiles", null); //desRelatePath must be null
+        await Starflut.copyFileFromAssets("testcallback.py",
+            "flutter_assets/starfiles", "flutter_assets/starfiles");
+        await Starflut.copyFileFromAssets("predict.py",
+            "flutter_assets/starfiles", "flutter_assets/starfiles");
+        await Starflut.copyFileFromAssets("python3.6.zip",
+            "flutter_assets/starfiles", null); //desRelatePath must be null
         await Starflut.copyFileFromAssets("zlib.cpython-36m.so", null, null);
         await Starflut.copyFileFromAssets(
             "unicodedata.cpython-36m.so", null, null);
@@ -123,17 +122,13 @@ class _VideoState extends State<Video> {
       dynamic rr1 = await SrvGroup.initRaw("python36", Service);
 
       print("initRaw = $rr1");
-
-      var Result = await SrvGroup.loadRawModule(
-          "python", "", resPath + "starfiles/" + "predict.py", false);
+      var Result = await SrvGroup.loadRawModule("python", "",
+          resPath + "/flutter_assets/starfiles/" + "predict.py", false);
       print("loadRawModule = $Result");
       dynamic python =
           await Service.importRawContext("python", "", "", false, "");
       print("python = " + await python.getString());
-      StarObjectClass retobj = await python.call("predict", ['$video']);
-      print(await retobj[0]);
-      print(await retobj[1]);
-      print(await python["g1"]);
+      StarObjectClass retobj = await python.call("predict", [toBePredicted]);
       await SrvGroup.clearService();
       await starcore.moduleExit();
       platformVersion = 'Python 3.6';
