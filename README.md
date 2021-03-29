@@ -1,7 +1,7 @@
-# ui_gp
+# Historia_app
 
-A new Flutter project.
-
+backend and models provided at:
+https://github.com/shahdhesham/Historia_backend
 ## Getting Started
 
 This project is a starting point for a Flutter application.
