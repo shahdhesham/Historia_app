@@ -67,7 +67,7 @@ flutter:
     - assets/Egypt_label.txt
     - assets/Egypt.tflite
     - starfiles/
-    - jniLibs/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
