@@ -65,7 +65,7 @@ flutter:
   assets:
     - images/
     - assets/Egypt_label.txt
-    - assets/Egypt.tflite
+    - assets/SEgypt.tflite
     - starfiles/
 
   #   - images/a_dot_ham.jpeg
