@@ -20,7 +20,7 @@ class _PredictState extends State<Predict> {
     try {
       String res;
       res = await Tflite.loadModel(
-        model: "assets/Egypt.tflite",
+        model: "assets/SEgypt.tflite",
         labels: "assets/Egypt_label.txt",
       );
       print(res);
