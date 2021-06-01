@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_tts/flutter_tts.dart';
 
 class Predict extends StatefulWidget {
@@ -16,18 +15,8 @@ class _PredictState extends State<Predict> {
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
-  String data = '';
 
-  fetchFileData() async {
-    String responseText;
-    print("tany 7eta");
-    //  String name= (_recognitions[0]['label'].toString().toUpperCase());
-    //   print(name);
-    responseText = await rootBundle.loadString('assets/Hanging Church.txt');
-    setState(() {
-      data = responseText;
-    });
-  }
+ 
 
   loadModel() async {
     Tflite.close();
@@ -105,7 +94,6 @@ class _PredictState extends State<Predict> {
 
   @override
   void initState() {
-    fetchFileData();
     super.initState();
 
     loadModel().then((val) {
@@ -136,8 +124,7 @@ class _PredictState extends State<Predict> {
       child: Center(
         child: Text(
           "Prediction: " +
-              _recognitions[0]['label'].toString().toUpperCase() +
-              data,
+              _recognitions[0]['label'].toString().toUpperCase(),
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
         ),
@@ -242,19 +229,24 @@ class _PredictState extends State<Predict> {
                 ),
               ],
             ),
-            Row(children: <Widget>[
+            Row(
+              children: <Widget>[
               Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: Container(
                       child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.volume_up),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'TextAudio');
+                    },
+                    icon: Icon(Icons.library_books_rounded),
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(24),
                     ),
                     label: Text(''),
-                  )))
+                  )
+                  )
+                  ),
             ])
           ],
         ));
