@@ -7,6 +7,8 @@ import 'package:ui_gp/User_home.dart';
 import 'package:ui_gp/predict.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
+import 'package:ui_gp/TextAudio.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
         'forgetpass': (context) => ForgetPassword(),
         'userhome': (context) => UserHome(),
         'predict': (context) => Predict(),
+        'TextAudio':(context)=>TextAudio(),
         'scann': (context) => DetectScreen(title: 'Detect Monument'),
         'video': (context) => Video(images: <Image>[]),
       },
