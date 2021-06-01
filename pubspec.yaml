@@ -37,6 +37,7 @@ dependencies:
   export_video_frame: ^0.0.5+4
   camera: ^0.7.0
   percent_indicator: ^2.1.9
+  flutter_tts:
   starflut:
   
 
@@ -65,6 +66,8 @@ flutter:
   assets:
     - images/
     - assets/Egypt_label.txt
+    - assets/Hanging Church.txt
+    - assets/Amr ibn Al-Aas Mosque.txt
     - assets/SEgypt.tflite
     - starfiles/
 

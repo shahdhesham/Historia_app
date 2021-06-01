@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Predict extends StatefulWidget {
   @override
@@ -14,6 +16,18 @@ class _PredictState extends State<Predict> {
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
+  String data = '';
+
+  fetchFileData() async {
+    String responseText;
+    print("tany 7eta");
+    //  String name= (_recognitions[0]['label'].toString().toUpperCase());
+    //   print(name);
+    responseText = await rootBundle.loadString('assets/Hanging Church.txt');
+    setState(() {
+      data = responseText;
+    });
+  }
 
   loadModel() async {
     Tflite.close();
@@ -50,6 +64,7 @@ class _PredictState extends State<Predict> {
       _recognitions = recognitions;
     });
   }
+  // String name='';
 
   // send image to predict method selected from gallery or camera
   sendImage(File image) async {
@@ -90,6 +105,7 @@ class _PredictState extends State<Predict> {
 
   @override
   void initState() {
+    fetchFileData();
     super.initState();
 
     loadModel().then((val) {
@@ -107,27 +123,32 @@ class _PredictState extends State<Predict> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
     }
-    print(_recognitions);
+    //   print(_recognitions);
+    //     print("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    String name = (_recognitions[0]['label'].toString().toUpperCase());
+    print(name);
 
+    // if( name != '' ){
+
+    // String name='';
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Center(
         child: Text(
-          "Prediction: " + _recognitions[0]['label'].toString().toUpperCase(),
+          "Prediction: " +
+              _recognitions[0]['label'].toString().toUpperCase() +
+              data,
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
         ),
       ),
     );
+    //}
   }
 
   @override
   Widget build(BuildContext context) {
-    // get the width and height of current screen the app is running on
     Size size = MediaQuery.of(context).size;
-
-    // initialize two variables that will represent final width and height of the segmentation
-    // and image preview on screen
     double finalW;
     double finalH;
 
@@ -137,8 +158,6 @@ class _PredictState extends State<Predict> {
       finalW = size.width;
       finalH = size.height;
     } else {
-      // ratio width and ratio height will given ratio to
-//      // scale up or down the preview image
       double ratioW = size.width / _imageWidth;
       double ratioH = size.height / _imageHeight;
 
@@ -223,7 +242,22 @@ class _PredictState extends State<Predict> {
                 ),
               ],
             ),
+            Row(children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                  child: Container(
+                      child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.volume_up),
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(24),
+                    ),
+                    label: Text(''),
+                  )))
+            ])
           ],
         ));
   }
 }
+
