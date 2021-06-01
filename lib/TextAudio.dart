@@ -57,7 +57,7 @@ class _TextAudioState extends State<TextAudio> {
                       child: ElevatedButton.icon(
                     onPressed: () {
                     },
-                    icon: Icon(Icons.keyboard_voice_sharp),
+                    icon: Icon(Icons.volume_up_outlined),
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(24),

@@ -15,6 +15,12 @@ class _PredictState extends State<Predict> {
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
+  String name;
+  _PredictState(this.name);
+ 
+  
+ 
+  
 
  
 
@@ -102,6 +108,7 @@ class _PredictState extends State<Predict> {
   }
 
   Widget printValue(rcg) {
+    
     if (rcg == null) {
       return Text('',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700));
@@ -111,14 +118,10 @@ class _PredictState extends State<Predict> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
     }
-    //   print(_recognitions);
-    //     print("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    String name = (_recognitions[0]['label'].toString().toUpperCase());
+   
+     name = (_recognitions[0]['label'].toString().toUpperCase());
     print(name);
-
-    // if( name != '' ){
-
-    // String name='';
+     
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Center(
