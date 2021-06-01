@@ -9,7 +9,7 @@ class Predict extends StatefulWidget {
   @override
   _PredictState createState() => _PredictState();
 }
-//daliaa
+
 class _PredictState extends State<Predict> {
   File _image;
   double _imageWidth;
