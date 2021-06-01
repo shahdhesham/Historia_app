@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class TextAudio extends StatefulWidget {
+  static const routeName = '/extractName';
   @override
   _TextAudioState createState() => _TextAudioState();
 }

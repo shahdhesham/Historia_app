@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class Predict extends StatefulWidget {
+    String name;
+  Predict(this.name);
   @override
   _PredictState createState() => _PredictState();
 }
@@ -15,8 +17,7 @@ class _PredictState extends State<Predict> {
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
-  String name;
-  _PredictState(this.name);
+
  
   
  
@@ -119,8 +120,8 @@ class _PredictState extends State<Predict> {
       );
     }
    
-     name = (_recognitions[0]['label'].toString().toUpperCase());
-    print(name);
+     widget.name = (_recognitions[0]['label'].toString().toUpperCase());
+    print(widget.name);
      
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
