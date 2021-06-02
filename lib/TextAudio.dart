@@ -9,9 +9,9 @@ class TextAudio extends StatefulWidget {
 }
 
 class _TextAudioState extends State<TextAudio> {
-    String data = '';
+  String data = '';
 
-   fetchFileData() async {
+  fetchFileData() async {
     String responseText;
     print("tany 7eta");
     responseText = await rootBundle.loadString('assets/Hanging Church.txt');
@@ -19,23 +19,22 @@ class _TextAudioState extends State<TextAudio> {
       data = responseText;
     });
   }
-   @override
+
+  @override
   void initState() {
     fetchFileData();
     super.initState();
   }
+
   @override
-  
   Widget build(BuildContext context) {
-     final args = ModalRoute.of(context).settings.arguments as Predict;
     return Scaffold(
-      
-     appBar: AppBar(
+        appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black, //change your color here
           ),
           title: Text(
-            "Detection"+args.name,
+            "Detection",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.black,
@@ -43,33 +42,24 @@ class _TextAudioState extends State<TextAudio> {
         ),
         body: ListView(
           children: <Widget>[
-          
-           Row(
-              children: <Widget>[
+            Row(children: <Widget>[
               Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: Container(
-                      child: Text(data)
-                  )
-                  ),
+                  child: Container(child: Text(data))),
             ]),
-            Row(
-              children: <Widget>[
+            Row(children: <Widget>[
               Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: Container(
                       child: ElevatedButton.icon(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.volume_up_outlined),
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(24),
                     ),
                     label: Text(''),
-                  )
-                  )
-                  ),
+                  ))),
             ])
           ],
         ));

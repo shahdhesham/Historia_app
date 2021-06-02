@@ -6,24 +6,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class Predict extends StatefulWidget {
-    String name;
-  Predict(this.name);
   @override
   _PredictState createState() => _PredictState();
 }
 
 class _PredictState extends State<Predict> {
   File _image;
+
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
-
- 
-  
- 
-  
-
- 
 
   loadModel() async {
     Tflite.close();
@@ -109,7 +101,6 @@ class _PredictState extends State<Predict> {
   }
 
   Widget printValue(rcg) {
-    
     if (rcg == null) {
       return Text('',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700));
@@ -119,16 +110,15 @@ class _PredictState extends State<Predict> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
     }
-   
-     widget.name = (_recognitions[0]['label'].toString().toUpperCase());
-    print(widget.name);
-     
+
+  String  name = (_recognitions[0]['label'].toString().toUpperCase());
+    print(name);
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Center(
         child: Text(
-          "Prediction: " +
-              _recognitions[0]['label'].toString().toUpperCase(),
+          "Prediction: " + _recognitions[0]['label'].toString().toUpperCase(),
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
         ),
@@ -233,8 +223,7 @@ class _PredictState extends State<Predict> {
                 ),
               ],
             ),
-            Row(
-              children: <Widget>[
+            Row(children: <Widget>[
               Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: Container(
@@ -248,12 +237,9 @@ class _PredictState extends State<Predict> {
                       padding: EdgeInsets.all(24),
                     ),
                     label: Text(''),
-                  )
-                  )
-                  ),
+                  ))),
             ])
           ],
         ));
   }
 }
-
