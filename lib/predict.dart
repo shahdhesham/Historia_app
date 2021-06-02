@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-
 class Predict extends StatefulWidget {
-    String name;
-  Predict(this.name);
+  //   String name;
+  // Predict(this.name);
   @override
   _PredictState createState() => _PredictState();
 }
@@ -17,13 +15,6 @@ class _PredictState extends State<Predict> {
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
-
- 
-  
- 
-  
-
- 
 
   loadModel() async {
     Tflite.close();
@@ -120,8 +111,8 @@ class _PredictState extends State<Predict> {
       );
     }
    
-     widget.name = (_recognitions[0]['label'].toString().toUpperCase());
-    print(widget.name);
+    //  widget.name = (_recognitions[0]['label'].toString().toUpperCase());
+    // print(widget.name);
      
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
