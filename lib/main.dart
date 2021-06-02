@@ -7,6 +7,9 @@ import 'package:ui_gp/User_home.dart';
 import 'package:ui_gp/predict.dart';
 import 'package:ui_gp/providers/auth.dart';
 import 'package:ui_gp/providers/monuments.dart';
+import 'package:ui_gp/screens/admin.dart';
+import 'package:ui_gp/screens/auth_screen.dart';
+import 'package:ui_gp/screens/splash_screen.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
 import 'package:ui_gp/TextAudio.dart';
@@ -40,7 +43,16 @@ class MyApp extends StatelessWidget {
                     primaryColor: Colors.black,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                   ),
-                  home: HomePage(),
+                  home: auth.isAuth
+                      ? HomePage()
+                      : FutureBuilder(
+                          future: auth.autoLogin(),
+                          builder: (ctx, autResSnapshot) =>
+                              autResSnapshot.connectionState ==
+                                      ConnectionState.waiting
+                                  ? SplashScreen()
+                                  : AuthScreen(),
+                        ),
                   routes: {
                     'signup': (context) => SignUP(),
                     'signin': (context) => SignIn(),
@@ -48,9 +60,9 @@ class MyApp extends StatelessWidget {
                     'userhome': (context) => UserHome(),
                     'predict': (context) => Predict(),
                     'TextAudio': (context) => TextAudio(),
-                    'scann': (context) =>
-                        DetectScreen(title: 'Detect Monument'),
+                    'Scan': (context) => DetectScreen(title: 'Detect Monument'),
                     'video': (context) => Video(images: <Image>[]),
+                    'admin': (context) => AdminPage(),
                   },
                 )));
   }
