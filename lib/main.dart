@@ -5,33 +5,65 @@ import 'package:ui_gp/SignIn.dart';
 import 'package:ui_gp/SignUp.dart';
 import 'package:ui_gp/User_home.dart';
 import 'package:ui_gp/predict.dart';
+import 'package:ui_gp/providers/auth.dart';
+import 'package:ui_gp/providers/monuments.dart';
+import 'package:ui_gp/screens/admin.dart';
+import 'package:ui_gp/screens/auth_screen.dart';
+import 'package:ui_gp/screens/splash_screen.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
 import 'package:ui_gp/TextAudio.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Auth(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: new ThemeData(
-        primaryColor: Colors.black,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: HomePage(),
-      routes: {
-        'signup': (context) => SignUP(),
-        'signin': (context) => SignIn(),
-        'forgetpass': (context) => ForgetPassword(),
-        'userhome': (context) => UserHome(),
-        'predict': (context) => Predict(),
-        'TextAudio':(context)=>TextAudio(),
-        'scann': (context) => DetectScreen(title: 'Detect Monument'),
-        'video': (context) => Video(images: <Image>[]),
-      },
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProxyProvider<Auth, Monuments>(
+            create: (_) => Monuments(
+                Provider.of<Auth>(context, listen: false).token,
+                Provider.of<Auth>(context, listen: false).userId, []),
+            update: (ctx, auth, monuments) =>
+                monuments..receiveToken(auth, monuments.items),
+          ),
+        ],
+        child: Consumer<Auth>(
+            builder: (ctx, auth, _) => MaterialApp(
+                  theme: ThemeData(
+                    primaryColor: Colors.black,
+                    visualDensity: VisualDensity.adaptivePlatformDensity,
+                  ),
+                  home: auth.isAuth
+                      ? HomePage()
+                      : FutureBuilder(
+                          future: auth.autoLogin(),
+                          builder: (ctx, autResSnapshot) =>
+                              autResSnapshot.connectionState ==
+                                      ConnectionState.waiting
+                                  ? SplashScreen()
+                                  : AuthScreen(),
+                        ),
+                  routes: {
+                    'signup': (context) => SignUP(),
+                    'signin': (context) => SignIn(),
+                    'forgetpass': (context) => ForgetPassword(),
+                    'userhome': (context) => UserHome(),
+                    'predict': (context) => Predict(),
+                    'TextAudio': (context) => TextAudio(),
+                    'Scan': (context) => DetectScreen(title: 'Detect Monument'),
+                    'video': (context) => Video(images: <Image>[]),
+                    'admin': (context) => AdminPage(),
+                  },
+                )));
   }
 }

@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:ui_gp/widgets/drawer.dart';
 
 class UserHome extends StatefulWidget {
   static const routeName = 'userhome';
@@ -19,6 +20,7 @@ class _UserHomeState extends State<UserHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         title: Text('My Home'),
         actions: <Widget>[
