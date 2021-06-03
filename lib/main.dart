@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui_gp/ForgetPassword.dart';
-import 'package:ui_gp/HomePage.dart';
-import 'package:ui_gp/SignIn.dart';
-import 'package:ui_gp/SignUp.dart';
+// import 'package:ui_gp/HomePage.dart';
+// import 'package:ui_gp/SignIn.dart';
+// import 'package:ui_gp/SignUp.dart';
 import 'package:ui_gp/User_home.dart';
 import 'package:ui_gp/predict.dart';
 import 'package:ui_gp/providers/auth.dart';
@@ -43,19 +43,19 @@ class MyApp extends StatelessWidget {
                     primaryColor: Colors.black,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                   ),
-                  home: auth.isAuth
-                      ? HomePage()
-                      : FutureBuilder(
-                          future: auth.autoLogin(),
-                          builder: (ctx, autResSnapshot) =>
-                              autResSnapshot.connectionState ==
-                                      ConnectionState.waiting
-                                  ? SplashScreen()
-                                  : AuthScreen(),
-                        ),
+                  home: AuthScreen(),
+                      //? UserHome()
+                      // : FutureBuilder(
+                      //     future: auth.autoLogin(),
+                      //     builder: (ctx, autResSnapshot) =>
+                      //         autResSnapshot.connectionState ==
+                      //                 ConnectionState.waiting
+                      //             ? AuthScreen()
+                      //             : AuthScreen(),
+                      //   ),
                   routes: {
-                    'signup': (context) => SignUP(),
-                    'signin': (context) => SignIn(),
+                    // 'signup': (context) => SignUP(),
+                    // 'signin': (context) => SignIn(),
                     'forgetpass': (context) => ForgetPassword(),
                     'userhome': (context) => UserHome(),
                     'predict': (context) => Predict(),
