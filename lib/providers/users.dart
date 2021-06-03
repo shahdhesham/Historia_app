@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ui_gp/models/user.dart';
 
-
 import '../models/HTTPException.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,8 +11,7 @@ class Users with ChangeNotifier {
   //var user = FirebaseAuth.instance.currentUser;
 //print(user.uid);
   List<User> _userDB = [];
-  static const baseUrl =
-      'https://historia-8452f-default-rtdb.firebaseio.com/';
+  static const baseUrl = 'https://historia-8452f-default-rtdb.firebaseio.com/';
   Future<void> fetchAndSetProducts() async {
     var url = '$baseUrl/users.json';
     try {
@@ -39,9 +37,7 @@ class Users with ChangeNotifier {
 
   Future<void> addUser(User user) async {
     final url = '$baseUrl/users.json';
-   // FirebaseAuth auth = FirebaseAuth.instance;
-
-
+    // FirebaseAuth auth = FirebaseAuth.instance;
 
     try {
       final response = await http.post(
@@ -54,14 +50,14 @@ class Users with ChangeNotifier {
         }),
       );
 
-      final newStore = User(
+      final newMonument = User(
           fname: user.fname,
           lname: user.lname,
           number: user.number,
           image: user.image,
           id: json.decode(response.body)['uid']);
 
-      _userDB.add(newStore);
+      _userDB.add(newMonument);
       notifyListeners();
     } catch (error) {
       print(error);
@@ -70,8 +66,7 @@ class Users with ChangeNotifier {
   }
 
   Future<void> updateUser(String id, User newUser) async {
-    final url =
-        'https://historia-8452f-default-rtdb.firebaseio.com/$id.json';
+    final url = 'https://historia-8452f-default-rtdb.firebaseio.com/$id.json';
 
     final userIndex = _userDB.indexWhere((user) => user.id == id);
     if (userIndex >= 0) {

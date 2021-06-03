@@ -121,26 +121,33 @@ packages:
     source: hosted
     version: "6.1.1"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2+2"
+    version: "0.5.3"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.4"
-  firebase_storage:
-    dependency: "direct main"
+    version: "2.1.0"
+  firebase_core_web:
+    dependency: transitive
     description:
-      name: firebase_storage
+      name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.6"
+    version: "0.2.1+1"
+  firebase_database:
+    dependency: "direct main"
+    description:
+      name: firebase_database
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.4.0"
   flutter:
     dependency: "direct main"
     description: flutter

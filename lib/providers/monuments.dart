@@ -9,8 +9,7 @@ import 'auth.dart';
 
 class Monuments with ChangeNotifier {
   Monuments(this.authToken, this.userId, this._monumentDB);
-  static const baseUrl =
-      'https://historia-8452f-default-rtdb.firebaseio.com/';
+  static const baseUrl = 'https://historia-8452f-default-rtdb.firebaseio.com/';
 
   List<Monument> _monumentDB = [];
   String authToken;
@@ -21,7 +20,9 @@ class Monuments with ChangeNotifier {
   }
 
   List<Monument> get favoriteItems {
-    return _monumentDB.where((monumentName) => monumentName.isFavorite).toList();
+    return _monumentDB
+        .where((monumentName) => monumentName.isFavorite)
+        .toList();
   }
 
   Monument findById(String id) {
@@ -44,19 +45,20 @@ class Monuments with ChangeNotifier {
         return;
       }
       url = '$baseUrl/userFav/$userId.json?auth=$authToken';
+
       final favoriteResponse = await http.get(url);
       final favoriteData = json.decode(favoriteResponse.body);
 
       final loadedMonuments = <Monument>[];
       dbData.forEach((monumentId, data) {
         print('Monuments receiveToken, monumwnt: $monumentId');
+        print(url);
         loadedMonuments.add(Monument(
           id: monumentId,
           monumentName: data['monumentName'],
           rating: data['rating'],
           location: data['location'],
-          number: data['number'],
-          
+          article: data['article'],
           longitude: data['Lng'],
           latitude: data['Ltd'],
           imageUrl: data['imageUrl'],
@@ -67,27 +69,31 @@ class Monuments with ChangeNotifier {
       _monumentDB = loadedMonuments;
       notifyListeners();
     } catch (error) {
+      print(error);
       rethrow;
     }
   }
 
   Future<void> deleteMonument(String id) async {
     final url = '$baseUrl/monuments/$id.json?auth=$authToken';
-    final existingProductIndex = _monumentDB.indexWhere((monuments) => monuments.id == id);
+    final existingMonumentIndex =
+        _monumentDB.indexWhere((monuments) => monuments.id == id);
 
-    var existingProduct = _monumentDB[existingProductIndex]; //optimistic update
-    _monumentDB.removeAt(existingProductIndex);
+    var existingMonument =
+        _monumentDB[existingMonumentIndex]; //optimistic update
+    _monumentDB.removeAt(existingMonumentIndex);
     notifyListeners();
     final response = await http.delete(url);
     if (response.statusCode >= 400) {
-      _monumentDB.insert(existingProductIndex, existingProduct);
+      _monumentDB.insert(existingMonumentIndex, existingMonument);
       notifyListeners();
       throw HttpException('Could not delete product.');
     }
-    existingProduct = null;
+    existingMonument = null;
   }
 
   Future<void> addMonuments(Monument monument) async {
+    print("i am here");
     final url = '$baseUrl/monuments.json?auth=$authToken';
 
     try {
@@ -95,22 +101,23 @@ class Monuments with ChangeNotifier {
         url,
         body: json.encode({
           'monumentName': monument.monumentName,
-          'rating': monument.rating,
+          //'rating': monument.rating,
           'location': monument.location,
-          'number': monument.number,
+          'article': monument.article,
           'imageUrl': monument.imageUrl,
           'Lng': monument.longitude,
           'Ltd': monument.latitude,
         }),
       );
+      print("i am here");
 
       final newMonument = Monument(
           monumentName: monument.monumentName,
           rating: monument.rating,
           location: monument.location,
-          number: monument.number,
+          article: monument.article,
           imageUrl: monument.imageUrl,
-          longitude:monument.longitude,
+          longitude: monument.longitude,
           latitude: monument.latitude,
           id: json.decode(response.body)['name']);
 
@@ -128,7 +135,8 @@ class Monuments with ChangeNotifier {
   Future<void> updateMonument(String id, Monument newMonument) async {
     final url = '$baseUrl/monuments/$id.json?auth=$authToken';
 
-    final monumentIndex = _monumentDB.indexWhere((monument) => monument.id == id);
+    final monumentIndex =
+        _monumentDB.indexWhere((monument) => monument.id == id);
     if (monumentIndex >= 0) {
       await http.patch(url,
           body: json.encode({
@@ -136,8 +144,7 @@ class Monuments with ChangeNotifier {
             'monumentName': newMonument.monumentName,
             'rating': newMonument.rating,
             'location': newMonument.location,
-            'number': newMonument.number,
-           
+            'article': newMonument.article,
             'Lng': newMonument.longitude,
             'Lat': newMonument.latitude,
             'imageUrl': newMonument.imageUrl,

@@ -7,9 +7,9 @@ import 'package:ui_gp/widgets/admin_monument.dart';
 import 'package:ui_gp/widgets/drawer.dart';
 
 class AdminPage extends StatelessWidget {
-  static const routeName = '/user-stores';
+  static const routeName = '/user-monuments';
 
-  Future<void> _refreshStores(BuildContext context) async {
+  Future<void> _refreshMonuments(BuildContext context) async {
     await Provider.of<Monuments>(context, listen: false).fetchAndSetMonuments();
   }
 
@@ -22,8 +22,6 @@ class AdminPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
-              // Navigator.of(context).pushNamed(EditStore.routeName);
-
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => crudMonument()),
@@ -34,27 +32,26 @@ class AdminPage extends StatelessWidget {
       ),
       drawer: AppDrawer(),
       body: FutureBuilder<Object>(
-          future: _refreshStores(context),
+          future: _refreshMonuments(context),
           builder: (context, snapshot) {
             return snapshot.connectionState == ConnectionState.waiting
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : RefreshIndicator(
-                    onRefresh: () => _refreshStores(context),
+                    onRefresh: () => _refreshMonuments(context),
                     child: Padding(
                       padding: EdgeInsets.all(8),
                       child: Consumer<Monuments>(
-                        builder: (context, storesData, child) =>
+                        builder: (context, monumentsData, child) =>
                             ListView.builder(
-                          itemCount: storesData.items.length,
+                          itemCount: monumentsData.items.length,
                           itemBuilder: (_, i) => Column(
                             children: [
-                              
                               AdminMonument(
-                                storesData.items[i].id,
-                                storesData.items[i].monumentName,
-                                storesData.items[i].imageUrl,
+                                monumentsData.items[i].id,
+                                monumentsData.items[i].monumentName,
+                                monumentsData.items[i].imageUrl,
                               ),
                               Divider(),
                             ],
