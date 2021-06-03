@@ -9,7 +9,7 @@ class Monument with ChangeNotifier {
       this.rating,
       this.imageUrl,
       this.location,
-      this.number,
+      this.article,
       this.review,
       this.longitude,
       this.latitude,
@@ -20,7 +20,7 @@ class Monument with ChangeNotifier {
   final double rating;
   final String imageUrl;
   final String location;
-  final String number;
+  final String article;
   final String review;
   final double longitude;
   final double latitude;

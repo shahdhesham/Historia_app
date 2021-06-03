@@ -13,7 +13,7 @@ const pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
 final validatePhone = RegExp(pattern);
 
 class crudMonument extends StatefulWidget {
-  static const routeName = 'edit-store';
+  static const routeName = 'edit-monument';
   @override
   _crudMonumentState createState() => _crudMonumentState();
 }
@@ -31,18 +31,18 @@ class _crudMonumentState extends State<crudMonument> {
   var _editedMonument = Monument(
     id: null,
     monumentName: '',
-    rating: 0.0,
-    number: '',
+    //rating: 0.0,
+    article: '',
     location: '',
     imageUrl: '',
     longitude: 0.0,
     latitude: 0.0,
   );
   var _initValues = {
-    'rating': 0.0,
-    'number': '',
+    //'rating': 0.0,
+    'article': '',
     'location': '',
-    'review': '',
+    // 'review': '',
     'imageUrl': '',
     'Lng': 0.0,
     'Ltd': 0.0,
@@ -59,16 +59,16 @@ class _crudMonumentState extends State<crudMonument> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final storeId = ModalRoute.of(context).settings.arguments as String;
-      if (storeId != null) {
+      final mounmentId = ModalRoute.of(context).settings.arguments as String;
+      if (mounmentId != null) {
         _editedMonument =
-            Provider.of<Monuments>(context, listen: false).findById(storeId);
+            Provider.of<Monuments>(context, listen: false).findById(mounmentId);
         _initValues = {
           'id': _editedMonument.id,
           'monumentName': _editedMonument.monumentName,
           'rating': _editedMonument.rating,
           'location': _editedMonument.location,
-          'number': _editedMonument.number,
+          'article': _editedMonument.article,
           'imageUrl': _editedMonument.imageUrl,
           'Lng': _editedMonument.longitude,
           'Ltd': _editedMonument.latitude,
@@ -119,6 +119,7 @@ class _crudMonumentState extends State<crudMonument> {
       try {
         await Provider.of<Monuments>(context, listen: false)
             .addMonuments(_editedMonument);
+        print("1111111111");
       } catch (error) {
         print(error);
         print("??????????");
@@ -160,7 +161,7 @@ class _crudMonumentState extends State<crudMonument> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Restaurant'),
+        title: Text('Add Monument'),
       ),
       body: _isLoading
           ? Center(
@@ -177,7 +178,7 @@ class _crudMonumentState extends State<crudMonument> {
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: TextFormField(
-                          initialValue: _initValues['storeTitle'],
+                          initialValue: _initValues['monumentName'],
                           decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -197,7 +198,7 @@ class _crudMonumentState extends State<crudMonument> {
                               monumentName: value,
                               rating: _editedMonument.rating,
                               location: _editedMonument.location,
-                              number: _editedMonument.number,
+                              article: _editedMonument.article,
                               imageUrl: _editedMonument.imageUrl,
                               latitude: _editedMonument.latitude,
                               longitude: _editedMonument.longitude,
@@ -216,10 +217,6 @@ class _crudMonumentState extends State<crudMonument> {
                               labelText: 'Location',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(32.0))),
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp('[a-zA-Z]')),
-                          ],
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter data';
@@ -233,7 +230,7 @@ class _crudMonumentState extends State<crudMonument> {
                               monumentName: _editedMonument.monumentName,
                               rating: _editedMonument.rating,
                               location: value,
-                              number: _editedMonument.number,
+                              article: _editedMonument.article,
                               imageUrl: _editedMonument.imageUrl,
                               latitude: _editedMonument.latitude,
                               longitude: _editedMonument.longitude,
@@ -272,7 +269,7 @@ class _crudMonumentState extends State<crudMonument> {
                                   monumentName: _editedMonument.monumentName,
                                   rating: _editedMonument.rating,
                                   location: _editedMonument.location,
-                                  number: _editedMonument.number,
+                                  article: _editedMonument.article,
                                   latitude: double.parse(value),
                                   longitude: _editedMonument.longitude,
                                   imageUrl: _editedMonument.imageUrl,
@@ -311,7 +308,7 @@ class _crudMonumentState extends State<crudMonument> {
                                   monumentName: _editedMonument.monumentName,
                                   rating: _editedMonument.rating,
                                   location: _editedMonument.location,
-                                  number: _editedMonument.number,
+                                  article: _editedMonument.article,
                                   longitude: double.parse(value),
                                   latitude: _editedMonument.latitude,
                                   imageUrl: _editedMonument.imageUrl,
@@ -325,11 +322,11 @@ class _crudMonumentState extends State<crudMonument> {
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: TextFormField(
-                          initialValue: _initValues['number'],
+                          initialValue: _initValues['article'],
                           decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                              labelText: 'Phone Number',
+                              labelText: ' article',
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(32.0))),
                           validator: (value) {
@@ -345,7 +342,7 @@ class _crudMonumentState extends State<crudMonument> {
                               monumentName: _editedMonument.monumentName,
                               rating: _editedMonument.rating,
                               location: _editedMonument.location,
-                              number: value,
+                              article: value,
                               imageUrl: _editedMonument.imageUrl,
                               latitude: _editedMonument.latitude,
                               longitude: _editedMonument.longitude,
@@ -387,7 +384,7 @@ class _crudMonumentState extends State<crudMonument> {
                               monumentName: _editedMonument.monumentName,
                               rating: _editedMonument.rating,
                               location: _editedMonument.location,
-                              number: _editedMonument.number,
+                              article: _editedMonument.article,
                               imageUrl: value,
                               latitude: _editedMonument.latitude,
                               longitude: _editedMonument.longitude,

@@ -61,15 +61,16 @@ class AppDrawer extends StatelessWidget {
               Provider.of<Auth>(context, listen: false).logout();
             },
           ),
-          Provider.of<Auth>(context, listen: false).userId ==
-                  '7iRgB1qyGYg7pskJFSHBclxbzde2'
-              ? ListTile(
-                  title: Text('Admin'),
-                  onTap: () => Navigator.pushNamed(context, 'admin'),
-                )
-              : ListTile(
-                  title: Text(' '),
-                ),
+          // Provider.of<Auth>(context, listen: false).userId ==
+          //         '7iRgB1qyGYg7pskJFSHBclxbzde2'
+          //     ?
+          ListTile(
+            title: Text('Admin'),
+            onTap: () => Navigator.pushNamed(context, 'admin'),
+          )
+          // : ListTile(
+          //     title: Text(' '),
+          //   ),
         ],
       ),
     );
