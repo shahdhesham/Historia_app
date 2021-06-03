@@ -9,7 +9,6 @@ import 'package:ui_gp/providers/auth.dart';
 import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/screens/admin.dart';
 import 'package:ui_gp/screens/auth_screen.dart';
-import 'package:ui_gp/screens/splash_screen.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
 import 'package:ui_gp/TextAudio.dart';
