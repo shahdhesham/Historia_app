@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'my_shared_preferences.dart';
+
 class Predict extends StatefulWidget {
   @override
   _PredictState createState() => _PredictState();
@@ -49,6 +52,15 @@ class _PredictState extends State<Predict> {
     setState(() {
       _recognitions = recognitions;
     });
+
+    String name = (_recognitions[0]['label'].toString().toUpperCase());
+ MySharedPreferences.instance.setStringValue("name", name);
+
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString('name', name);
+
+    print("hi");
+    print(name);
   }
   // String name='';
 
@@ -108,9 +120,6 @@ class _PredictState extends State<Predict> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
     }
-
-  String  name = (_recognitions[0]['label'].toString().toUpperCase());
-    print(name);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),

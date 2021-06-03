@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'my_shared_preferences.dart';
 
 
 class TextAudio extends StatefulWidget {
@@ -9,8 +10,15 @@ class TextAudio extends StatefulWidget {
 }
 
 enum TtsState { playing, stopped, continued }
-
 class _TextAudioState extends State<TextAudio> {
+   @override
+  initState() {
+    // _onChange(_newVoiceText);
+    super.initState();
+    initTts();
+    // getStringValuesSF();
+  }
+// String _email='';
    FlutterTts flutterTts;
   String language;
   String engine;
@@ -19,8 +27,22 @@ class _TextAudioState extends State<TextAudio> {
   double rate = 1.0;
   bool isCurrentLanguageInstalled = false;
 
+//   getStringValuesSF() async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   //  setState(() {
+//   //     _email = (prefs.getString('name')??'');
+//   //   });
+//   //Return String
+//   // String name = prefs.getString('name');
+//   //  print (name);
+//   // return name;
 
-  String _newVoiceText=" Here  Amr ibn el ass mosque ";
+// }
+
+
+
+  // String _newVoiceText="Here  Amr ibn el ass mosque ";
+  String _newVoiceText= "";
 
   TtsState ttsState = TtsState.stopped;
 
@@ -28,13 +50,7 @@ class _TextAudioState extends State<TextAudio> {
   get isStopped => ttsState == TtsState.stopped;
   get isContinued => ttsState == TtsState.continued;
 
-  @override
-  initState() {
-    // _onChange(_newVoiceText);
-    super.initState();
-    initTts();
-  }
-
+ 
   initTts() {
     flutterTts = FlutterTts();
 
@@ -68,6 +84,11 @@ class _TextAudioState extends State<TextAudio> {
   }
 
   Future _speak() async {
+      MySharedPreferences.instance.getStringValue("name")
+      .then((value) => setState(() {
+              _newVoiceText = value;
+            }));
+
     await flutterTts.setVolume(volume);
     await flutterTts.setSpeechRate(rate);
     await flutterTts.setPitch(1);
@@ -89,6 +110,7 @@ class _TextAudioState extends State<TextAudio> {
   void dispose() {
     super.dispose();
     flutterTts.stop();
+    MySharedPreferences.instance.removeAll();
   }
 
   // void _onChange(String text) {
@@ -98,6 +120,10 @@ class _TextAudioState extends State<TextAudio> {
   // }
   @override
   Widget build(BuildContext context) {
+      MySharedPreferences.instance.getStringValue("name")
+      .then((value) => setState(() {
+              _newVoiceText = value;
+            }));
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
@@ -123,7 +149,8 @@ class _TextAudioState extends State<TextAudio> {
       alignment: Alignment.topCenter,
       padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),   
       child:
-       Text(_newVoiceText
+       Text(
+         _newVoiceText
         // onChanged: (String value) {
         //   _onChange(value);
         // },

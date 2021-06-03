@@ -232,6 +232,24 @@ class _AuthCardState extends State<AuthCard> {
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   textColor: Theme.of(context).primaryColor,
                 ),
+                
+                 Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                child: Text(
+                  'Continue without signing in',
+                  style: TextStyle(
+                    fontFamily: 'Calibri',
+                    fontSize: 12,
+                    color: const Color.fromRGBO(255,127,80, 0.5),
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, 'userhome');
+                },
+              ),
+            ),
               ],
             ),
           ),
