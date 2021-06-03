@@ -43,7 +43,8 @@ class _SignInState extends State<SignIn> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: 
+                    InputDecoration(
                         fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:
@@ -52,7 +53,8 @@ class _SignInState extends State<SignIn> {
                         border: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.grey, width: 2.0),
-                        )),
+                        )
+                        ),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -65,7 +67,8 @@ class _SignInState extends State<SignIn> {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration:
+                     InputDecoration(
                         fillColor: Colors.white.withOpacity(0.75),
                         filled: true,
                         contentPadding:

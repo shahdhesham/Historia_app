@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:ui_gp/models/HTTPException.dart';
 import 'package:ui_gp/providers/auth.dart';
 
-
 enum AuthMode { signup, login }
 
 class AuthScreen extends StatelessWidget {
@@ -18,23 +17,65 @@ class AuthScreen extends StatelessWidget {
         children: <Widget>[
           SingleChildScrollView(
             child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/image1.jpg'),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.85), BlendMode.dstIn),
+                ),
+              ),
               height: deviceSize.height,
               width: deviceSize.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Flexible(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 94.0),
-                      child: Image.asset(
-                        'images/logo.png',
-                        alignment: Alignment.topCenter,
-                        fit: BoxFit.contain,
+                  Container(
+                    child: Text(
+                      'Welcome to ',
+                      style: TextStyle(
+                        fontFamily: 'BOUNCY',
+                        fontSize: 25,
+                        color: const Color(0xffffffff),
                       ),
                     ),
                   ),
+                  Container(
+                    child: Text(
+                      'Historia',
+                      style: TextStyle(
+                        fontFamily: 'Antens',
+                        fontSize: 100,
+                        color: const Color(0xffffffff),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 90),
+                    child: Container(
+                      child: Text(
+                        'your virtual tour guide',
+                        style: TextStyle(
+                          fontFamily: 'BOUNCY',
+                          fontSize: 30,
+                          color: const Color(0xffffffff),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Flexible(
+                  //   child: Container(
+                  //     padding: EdgeInsets.symmetric(
+                  //         vertical: 10.0, horizontal: 94.0),
+                  //     // child: Image.asset(
+                  //     //   'images/logo.png',
+                  //     //   alignment: Alignment.topCenter,
+                  //     //   fit: BoxFit.contain,
+                  //     // ),
+                  //   ),
+                  // ),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
@@ -150,10 +191,12 @@ class _AuthCardState extends State<AuthCard> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
+      elevation: 80,
+      color: Colors.white.withOpacity(0.75),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      elevation: 8.0,
+      // elevation: 8.0,
       child: Container(
         height: _authMode == AuthMode.signup ? 360 : 300,
         constraints:
@@ -232,24 +275,21 @@ class _AuthCardState extends State<AuthCard> {
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   textColor: Theme.of(context).primaryColor,
                 ),
-                
-                 Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                child: Text(
-                  'Continue without signing in',
-                  style: TextStyle(
-                    fontFamily: 'Calibri',
-                    fontSize: 12,
-                    color: const Color.fromRGBO(255,127,80, 0.5),
-                    decoration: TextDecoration.underline,
+                FlatButton(
+                  // padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Continue without signing in',
+                    style: TextStyle(
+                      fontFamily: 'Calibri',
+                      fontSize: 12,
+                      // color: const Color(0xffffffff),
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'userhome');
+                  },
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, 'userhome');
-                },
-              ),
-            ),
               ],
             ),
           ),
