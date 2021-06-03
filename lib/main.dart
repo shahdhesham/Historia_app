@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
                     'userhome': (context) => UserHome(),
                     'predict': (context) => Predict(),
                     'TextAudio': (context) => TextAudio(),
-                    'Scan': (context) => DetectScreen(title: 'Detect Monument'),
+                    'scann': (context) => DetectScreen(title: 'Detect Monument'),
                     'video': (context) => Video(images: <Image>[]),
                     'admin': (context) => AdminPage(),
                   },
