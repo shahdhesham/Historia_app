@@ -10,13 +10,13 @@ class MonumentsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storesData = provider.Provider.of<Monuments>(context);
-    final stores = showFavs ? storesData.favoriteItems : storesData.items;
+    final monumentsData = provider.Provider.of<Monuments>(context);
+    final monunents = showFavs ? monumentsData.favoriteItems : monumentsData.items;
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
-      itemCount: stores.length,
+      itemCount: monunents.length,
       itemBuilder: (ctx, i) => provider.ChangeNotifierProvider.value(
-        value: stores[i],
+        value: monunents[i],
         child: MonumentItem(),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

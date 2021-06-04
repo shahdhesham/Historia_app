@@ -17,13 +17,15 @@ class MonumentDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Monument Info'),
+        title: Text('${loadedMonument.monumentName}'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 40),
             Container(
               height: 300,
+              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
               width: double.infinity,
               child: Image.network(
                 loadedMonument.imageUrl,
@@ -36,7 +38,7 @@ class MonumentDetail extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 width: double.infinity,
                 child: Text(
-                  loadedMonument.monumentName,
+                  '${loadedMonument.location}',
                   textAlign: TextAlign.center,
                   softWrap: true,
                 ),
@@ -45,21 +47,16 @@ class MonumentDetail extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(height: 10),
-                    Text('Call Us:',
-                        style: TextStyle(
-                          fontSize: 20,
-                        )),
                     SizedBox(height: 10),
                     Text(
                       '  ${loadedMonument.article}',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ]),
@@ -82,31 +79,7 @@ class MonumentDetail extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                width: double.infinity,
-                child: Text(
-                  'We are in ${loadedMonument.location}',
-                  textAlign: TextAlign.center,
-                  softWrap: true,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                width: double.infinity,
-                child: Text('Visit us:',
-                    textAlign: TextAlign.left,
-                    softWrap: true,
-                    style: TextStyle(
-                      fontSize: 25,
-                    )),
-              ),
-            ),
+
             // Container(
             //   height: 300,
             //   width: 300,

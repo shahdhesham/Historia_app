@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ui_gp/ForgetPassword.dart';
-// import 'package:ui_gp/HomePage.dart';
-// import 'package:ui_gp/SignIn.dart';
-// import 'package:ui_gp/SignUp.dart';
 import 'package:ui_gp/User_home.dart';
 import 'package:ui_gp/predict.dart';
 import 'package:ui_gp/providers/auth.dart';
 import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/screens/admin.dart';
 import 'package:ui_gp/screens/auth_screen.dart';
+import 'package:ui_gp/screens/monumentDetail.dart';
 import 'package:ui_gp/screens/monumentsMenu.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
@@ -63,6 +61,7 @@ class MyApp extends StatelessWidget {
                     'video': (context) => Video(images: <Image>[]),
                     'admin': (context) => AdminPage(),
                     'monuments': (context) => MonumentsMenu(auth.userName),
+                    'monument-detail': (context) => MonumentDetail(),
                   },
                 )));
   }
