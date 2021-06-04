@@ -30,13 +30,13 @@ class MonumentItem extends StatelessWidget {
           ),
         ),
         footer: GridTileBar(
-          backgroundColor: Colors.green[200],
+          backgroundColor: Colors.black,
           leading: Consumer<Monument>(
             builder: (ctx, monument, _) => IconButton(
               icon: Icon(
                 monument.isFavorite ? Icons.favorite : Icons.favorite_border,
               ),
-              color: Theme.of(context).accentColor,
+              color: Colors.amber,
               onPressed: () {
                 monument.toggleFavoriteStatus(authData.token, authData.userId);
               },

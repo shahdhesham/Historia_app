@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/screens/crudmonument.dart';
-import 'package:ui_gp/widgets/admin_monument.dart';
+import 'package:ui_gp/widgets/monument/admin_monument.dart';
 import 'package:ui_gp/widgets/drawer.dart';
 
 class AdminPage extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:ui_gp/providers/monuments.dart';
 
 class MonumentDetail extends StatelessWidget {
-  static const routeName = 'store-detail';
+  static const routeName = 'monument-detail';
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class MonumentDetail extends StatelessWidget {
                     Text(
                       '  ${loadedMonument.article}',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

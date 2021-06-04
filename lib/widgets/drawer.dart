@@ -9,14 +9,14 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: Text('Wise Food '),
+            title: Text('Historia'),
             automaticallyImplyLeading: false,
           ),
           Divider(),
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
-            onTap: () => Navigator.pushNamed(context, 'home'),
+            onTap: () => Navigator.pushNamed(context, 'userhome'),
           ),
           ListTile(
             leading: Icon(Icons.supervised_user_circle),
@@ -24,20 +24,11 @@ class AppDrawer extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, 'profile'),
           ),
           ListTile(
-            leading: Icon(Icons.shop),
-            title: Text('Recommendations'),
-            onTap: () => Navigator.pushNamed(context, 'recommend'),
+            leading: Icon(Icons.add_location),
+            title: Text('Monuments'),
+            onTap: () => Navigator.pushNamed(context, 'monuments'),
           ),
-          ListTile(
-            leading: Icon(Icons.group_work),
-            title: Text('Cuisines'),
-            onTap: () => Navigator.pushNamed(context, 'cuisines'),
-          ),
-          ListTile(
-            leading: Icon(Icons.add_sharp),
-            title: Text('Join Us'),
-            onTap: () => Navigator.pushNamed(context, 'join us'),
-          ),
+
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings'),

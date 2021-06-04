@@ -54,7 +54,7 @@ class _PredictState extends State<Predict> {
     });
 
     String name = (_recognitions[0]['label'].toString().toUpperCase());
- MySharedPreferences.instance.setStringValue("name", name);
+    MySharedPreferences.instance.setStringValue("name", name);
 
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setString('name', name);
@@ -197,13 +197,13 @@ class _PredictState extends State<Predict> {
                       onPressed: selectFromCamera,
                       icon: Icon(
                         Icons.camera_alt,
-                        color: Colors.white,
+                        color: Colors.black,
                         size: 30,
                       ),
-                      color: Colors.deepPurple,
+                      color: Color.fromRGBO(255, 228, 181, 1),
                       label: Text(
                         "Camera",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
                     margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
@@ -217,13 +217,13 @@ class _PredictState extends State<Predict> {
                     onPressed: selectFromGallery,
                     icon: Icon(
                       Icons.file_upload,
-                      color: Colors.white,
+                      color: Colors.black,
                       size: 30,
                     ),
-                    color: Colors.blueAccent,
+                    color: Color.fromRGBO(255, 228, 181, 1),
                     label: Text(
                       "Gallery",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
                   ),
                   margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
@@ -238,7 +238,10 @@ class _PredictState extends State<Predict> {
                     onPressed: () {
                       Navigator.pushNamed(context, 'TextAudio');
                     },
-                    icon: Icon(Icons.library_books_rounded),
+                    icon: Icon(
+                      Icons.library_books_rounded,
+                      color: Colors.black,
+                    ),
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(24),

@@ -9,6 +9,7 @@ import 'package:ui_gp/providers/auth.dart';
 import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/screens/admin.dart';
 import 'package:ui_gp/screens/auth_screen.dart';
+import 'package:ui_gp/screens/monumentsMenu.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/scann.dart';
 import 'package:ui_gp/TextAudio.dart';
@@ -43,25 +44,25 @@ class MyApp extends StatelessWidget {
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                   ),
                   home: AuthScreen(),
-                      //? UserHome()
-                      // : FutureBuilder(
-                      //     future: auth.autoLogin(),
-                      //     builder: (ctx, autResSnapshot) =>
-                      //         autResSnapshot.connectionState ==
-                      //                 ConnectionState.waiting
-                      //             ? AuthScreen()
-                      //             : AuthScreen(),
-                      //   ),
+                  //? UserHome()
+                  // : FutureBuilder(
+                  //     future: auth.autoLogin(),
+                  //     builder: (ctx, autResSnapshot) =>
+                  //         autResSnapshot.connectionState ==
+                  //                 ConnectionState.waiting
+                  //             ? AuthScreen()
+                  //             : AuthScreen(),
+                  //   ),
                   routes: {
-                    // 'signup': (context) => SignUP(),
-                    // 'signin': (context) => SignIn(),
                     'forgetpass': (context) => ForgetPassword(),
-                    'userhome': (context) => UserHome(),
+                    'userhome': (context) => UserHome(auth.userName),
                     'predict': (context) => Predict(),
                     'TextAudio': (context) => TextAudio(),
-                    'scann': (context) => DetectScreen(title: 'Detect Monument'),
+                    'scann': (context) =>
+                        DetectScreen(title: 'Detect Monument'),
                     'video': (context) => Video(images: <Image>[]),
                     'admin': (context) => AdminPage(),
+                    'monuments': (context) => MonumentsMenu(auth.userName),
                   },
                 )));
   }
