@@ -29,6 +29,9 @@ class Monuments with ChangeNotifier {
     return _monumentDB.firstWhere((monument) => monument.id == id);
   }
 
+  Monument findByName(String name) {
+    return _monumentDB.firstWhere((monument) => monument.monumentName == name);
+  }
   List<Monument> returnAll() {
     return _monumentDB;
   }

@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
+import 'package:ui_gp/providers/monuments.dart';
 import 'models/monument.dart';
 import 'my_shared_preferences.dart';
 
 class TextAudio extends StatefulWidget {
-  
   @override
   _TextAudioState createState() => _TextAudioState();
 }
@@ -15,8 +15,7 @@ class TextAudio extends StatefulWidget {
 enum TtsState { playing, stopped, continued }
 
 class _TextAudioState extends State<TextAudio> {
-
-@override
+  @override
   initState() {
     // _onChange(_newVoiceText);
     super.initState();
@@ -109,17 +108,30 @@ class _TextAudioState extends State<TextAudio> {
   //     _newVoiceText = text;
   //   });
   // }
-  
+
   @override
   Widget build(BuildContext context) {
-  final monument = Provider.of<Monument>(context, listen: false);
+    // final monument = Provider.of<Monument>(context, listen: false);
+     //final monumentName = ModalRoute.of(context).settings.arguments as String;
 
     MySharedPreferences.instance
         .getStringValue("name")
         .then((value) => setState(() {
-         // if(value == monument.monumentName){
-              _newVoiceText = value;
-            //  }
+              final loadedMonument = Provider.of<Monuments>(
+                context,
+                listen: false,
+              ).findByName(value);
+             // if (value == loadedMonument.monumentName)
+              if(loadedMonument.monumentName != " ")
+               {
+                _newVoiceText = '${loadedMonument.article}';
+              //  print(_newVoiceText);
+                //print("////////////////////////////////////");
+              }
+              else{
+                _newVoiceText="empty";
+              }
+              
             }));
 
     return Scaffold(
