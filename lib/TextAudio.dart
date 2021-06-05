@@ -1,11 +1,8 @@
 import 'dart:async';
-// import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:provider/provider.dart';
-import 'package:ui_gp/providers/monuments.dart';
-import 'models/monument.dart';
 import 'my_shared_preferences.dart';
+
 
 class TextAudio extends StatefulWidget {
   @override
@@ -13,18 +10,16 @@ class TextAudio extends StatefulWidget {
 }
 
 enum TtsState { playing, stopped, continued }
-
 class _TextAudioState extends State<TextAudio> {
-  @override
+   @override
   initState() {
     // _onChange(_newVoiceText);
     super.initState();
     initTts();
     // getStringValuesSF();
   }
-
 // String _email='';
-  FlutterTts flutterTts;
+   FlutterTts flutterTts;
   String language;
   String engine;
   double volume = 1.0;
@@ -32,7 +27,8 @@ class _TextAudioState extends State<TextAudio> {
   double rate = 1.0;
   bool isCurrentLanguageInstalled = false;
 
-  String _newVoiceText = "";
+  // String _newVoiceText="Here  Amr ibn el ass mosque ";
+  String _newVoiceText= "";
 
   TtsState ttsState = TtsState.stopped;
 
@@ -40,6 +36,7 @@ class _TextAudioState extends State<TextAudio> {
   get isStopped => ttsState == TtsState.stopped;
   get isContinued => ttsState == TtsState.continued;
 
+ 
   initTts() {
     flutterTts = FlutterTts();
 
@@ -73,9 +70,8 @@ class _TextAudioState extends State<TextAudio> {
   }
 
   Future _speak() async {
-    MySharedPreferences.instance
-        .getStringValue("name")
-        .then((value) => setState(() {
+      MySharedPreferences.instance.getStringValue("name")
+      .then((value) => setState(() {
               _newVoiceText = value;
             }));
 
@@ -108,35 +104,16 @@ class _TextAudioState extends State<TextAudio> {
   //     _newVoiceText = text;
   //   });
   // }
-
   @override
   Widget build(BuildContext context) {
-    // final monument = Provider.of<Monument>(context, listen: false);
-     //final monumentName = ModalRoute.of(context).settings.arguments as String;
-
-    MySharedPreferences.instance
-        .getStringValue("name")
-        .then((value) => setState(() {
-              final loadedMonument = Provider.of<Monuments>(
-                context,
-                listen: false,
-              ).findByName(value);
-             // if (value == loadedMonument.monumentName)
-              if(loadedMonument.monumentName != " ")
-               {
-                _newVoiceText = '${loadedMonument.article}';
-              //  print(_newVoiceText);
-                //print("////////////////////////////////////");
-              }
-              else{
-                _newVoiceText="empty";
-              }
-              
+      MySharedPreferences.instance.getStringValue("name")
+      .then((value) => setState(() {
+              _newVoiceText = value;
             }));
-
-    return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+               iconTheme: IconThemeData(
             color: Colors.black, //change your color here
           ),
           title: Text(
@@ -146,34 +123,40 @@ class _TextAudioState extends State<TextAudio> {
           backgroundColor: Colors.black,
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(children: [
-              _inputSection(),
-              _btnSection(),
-            ])));
+            body: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(children: [
+                  _inputSection(),
+                  _btnSection(),
+               
+                ]))));
   }
-
   Widget _inputSection() => Container(
       alignment: Alignment.topCenter,
-      padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
-      child: Text(_newVoiceText
-          // onChanged: (String value) {
-          //   _onChange(value);
-          // },
-          ));
+      padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),   
+      child:
+       Text(
+         _newVoiceText
+        // onChanged: (String value) {
+        //   _onChange(value);
+        // },
+      )
+ 
+      );
 
   Widget _btnSection() {
-    return Container(
-        padding: EdgeInsets.only(top: 50.0),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow,
-              'PLAY', _speak),
-          _buildButtonColumn(
-              Colors.red, Colors.redAccent, Icons.stop, 'STOP', _stop),
-        ]));
-  }
+      return Container(
+          padding: EdgeInsets.only(top: 50.0),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            _buildButtonColumn(Colors.green, Colors.greenAccent,
+                Icons.play_arrow, 'PLAY', _speak),
+            _buildButtonColumn(
+                Colors.red, Colors.redAccent, Icons.stop, 'STOP', _stop),
+          ])
+          );
 
+  }
   Column _buildButtonColumn(Color color, Color splashColor, IconData icon,
       String label, Function func) {
     return Column(
@@ -194,4 +177,5 @@ class _TextAudioState extends State<TextAudio> {
                       color: color)))
         ]);
   }
+
 }
