@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:js';
+// import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
@@ -112,20 +112,16 @@ class _TextAudioState extends State<TextAudio> {
   
   @override
   Widget build(BuildContext context) {
-      @override
   final monument = Provider.of<Monument>(context, listen: false);
 
     MySharedPreferences.instance
         .getStringValue("name")
         .then((value) => setState(() {
+         // if(value == monument.monumentName){
               _newVoiceText = value;
+            //  }
             }));
 
-
-            if( MySharedPreferences.instance
-        .getStringValue("name") == monument.monumentName){
-
-        }
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
