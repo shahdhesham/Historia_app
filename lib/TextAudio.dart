@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:provider/provider.dart';
+import 'models/monument.dart';
 import 'my_shared_preferences.dart';
 
 class TextAudio extends StatefulWidget {
+  
   @override
   _TextAudioState createState() => _TextAudioState();
 }
@@ -11,7 +15,8 @@ class TextAudio extends StatefulWidget {
 enum TtsState { playing, stopped, continued }
 
 class _TextAudioState extends State<TextAudio> {
-  @override
+
+@override
   initState() {
     // _onChange(_newVoiceText);
     super.initState();
@@ -28,19 +33,6 @@ class _TextAudioState extends State<TextAudio> {
   double rate = 1.0;
   bool isCurrentLanguageInstalled = false;
 
-//   getStringValuesSF() async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   //  setState(() {
-//   //     _email = (prefs.getString('name')??'');
-//   //   });
-//   //Return String
-//   // String name = prefs.getString('name');
-//   //  print (name);
-//   // return name;
-
-// }
-
-  // String _newVoiceText="Here  Amr ibn el ass mosque ";
   String _newVoiceText = "";
 
   TtsState ttsState = TtsState.stopped;
@@ -117,13 +109,23 @@ class _TextAudioState extends State<TextAudio> {
   //     _newVoiceText = text;
   //   });
   // }
+  
   @override
   Widget build(BuildContext context) {
+      @override
+  final monument = Provider.of<Monument>(context, listen: false);
+
     MySharedPreferences.instance
         .getStringValue("name")
         .then((value) => setState(() {
               _newVoiceText = value;
             }));
+
+
+            if( MySharedPreferences.instance
+        .getStringValue("name") == monument.monumentName){
+
+        }
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
