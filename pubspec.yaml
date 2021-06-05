@@ -30,15 +30,20 @@ dependencies:
   cupertino_icons: ^1.0.0
   arcore_flutter_plugin:
   adobe_xd: ^1.1.0
-  #firebase_core: ^0.4.5
+  firebase_core: ^0.5.3
   image_picker: ^0.6.7+14
-  firebase_storage: ^3.1.6
   permission_handler: ^5.0.1+1
   tflite: ^1.1.1
   export_video_frame: ^0.0.5+4
   camera: ^0.7.0
   percent_indicator: ^2.1.9
+  flutter_tts:
   starflut:
+  shared_preferences: ^2.0.6
+  provider: ^5.0.0
+  firebase_database: ^4.4.0
+  
+  
   
 
 
@@ -66,7 +71,9 @@ flutter:
   assets:
     - images/
     - assets/Egypt_label.txt
-    - assets/Egypt.tflite
+    - assets/Hanging Church.txt
+    - assets/Amr ibn Al-Aas Mosque.txt
+    - assets/SEgypt.tflite
     - starfiles/
 
   #   - images/a_dot_ham.jpeg

@@ -10,7 +10,7 @@
     <uses-feature android:name="android.hardware.camera.ar" />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="ui_gp"
+        android:label="Historia"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

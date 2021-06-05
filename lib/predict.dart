@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'my_shared_preferences.dart';
 
 class Predict extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class Predict extends StatefulWidget {
 
 class _PredictState extends State<Predict> {
   File _image;
+
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
@@ -20,7 +23,7 @@ class _PredictState extends State<Predict> {
     try {
       String res;
       res = await Tflite.loadModel(
-        model: "assets/Egypt.tflite",
+        model: "assets/SEgypt.tflite",
         labels: "assets/Egypt_label.txt",
       );
       print(res);
@@ -49,7 +52,17 @@ class _PredictState extends State<Predict> {
     setState(() {
       _recognitions = recognitions;
     });
+
+    String name = (_recognitions[0]['label'].toString().toUpperCase());
+    MySharedPreferences.instance.setStringValue("name", name);
+
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString('name', name);
+
+    print("hi");
+    print(name);
   }
+  // String name='';
 
   // send image to predict method selected from gallery or camera
   sendImage(File image) async {
@@ -107,7 +120,6 @@ class _PredictState extends State<Predict> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700)),
       );
     }
-    print(_recognitions);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -119,15 +131,12 @@ class _PredictState extends State<Predict> {
         ),
       ),
     );
+    //}
   }
 
   @override
   Widget build(BuildContext context) {
-    // get the width and height of current screen the app is running on
     Size size = MediaQuery.of(context).size;
-
-    // initialize two variables that will represent final width and height of the segmentation
-    // and image preview on screen
     double finalW;
     double finalH;
 
@@ -137,8 +146,6 @@ class _PredictState extends State<Predict> {
       finalW = size.width;
       finalH = size.height;
     } else {
-      // ratio width and ratio height will given ratio to
-//      // scale up or down the preview image
       double ratioW = size.width / _imageWidth;
       double ratioH = size.height / _imageHeight;
 
@@ -190,13 +197,13 @@ class _PredictState extends State<Predict> {
                       onPressed: selectFromCamera,
                       icon: Icon(
                         Icons.camera_alt,
-                        color: Colors.white,
+                        color: Colors.black,
                         size: 30,
                       ),
-                      color: Colors.deepPurple,
+                      color: Color.fromRGBO(255, 228, 181, 1),
                       label: Text(
                         "Camera",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
                     margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
@@ -210,19 +217,38 @@ class _PredictState extends State<Predict> {
                     onPressed: selectFromGallery,
                     icon: Icon(
                       Icons.file_upload,
-                      color: Colors.white,
+                      color: Colors.black,
                       size: 30,
                     ),
-                    color: Colors.blueAccent,
+                    color: Color.fromRGBO(255, 228, 181, 1),
                     label: Text(
                       "Gallery",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Colors.black, fontSize: 20),
                     ),
                   ),
                   margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                 ),
               ],
             ),
+            Row(children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                  child: Container(
+                      child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'TextAudio');
+                    },
+                    icon: Icon(
+                      Icons.library_books_rounded,
+                      color: Colors.black,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(24),
+                    ),
+                    label: Text(''),
+                  ))),
+            ])
           ],
         ));
   }

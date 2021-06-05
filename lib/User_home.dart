@@ -2,12 +2,15 @@
 
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:ui_gp/widgets/drawer.dart';
 
 class UserHome extends StatefulWidget {
+  UserHome(this._userName);
+  final _userName;
+
   static const routeName = 'userhome';
   @override
   _UserHomeState createState() => _UserHomeState();
@@ -19,6 +22,7 @@ class _UserHomeState extends State<UserHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         title: Text('My Home'),
         actions: <Widget>[
@@ -49,7 +53,7 @@ class _UserHomeState extends State<UserHome> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'Welcome Helena ',
+                    'Welcome ${widget._userName} ',
                     style: TextStyle(
                       fontFamily: 'Antens',
                       fontSize: 70,
@@ -66,13 +70,17 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 0.89),
+                      primary: Color.fromRGBO(255, 228, 181, 1),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'scann');
                     },
                     child: Text(
                       'Start Scanning',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
                     ),
                   ),
                 ),
@@ -84,33 +92,21 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 0.89),
+                      primary: Color.fromRGBO(255, 228, 181, 1),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'predict');
                     },
                     child: Text(
                       'Upload Picture Offline',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
               ),
-              //  Padding(
-              //   padding: const EdgeInsets.only(top: 60),
-              //   child: Container(
-              //     width: 200.0,
-              //     height: 60,
-              //     child: ElevatedButton(
-              //       style: ElevatedButton.styleFrom(
-              //         primary: Color.fromRGBO(255, 228, 181, 0.89),
-              //       ),
-              //       onPressed: () {},
-              //       child: Text(
-              //         'Neaby Monuments',
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 60),
                 child: Container(
@@ -118,11 +114,37 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 0.89),
+                      primary: Color.fromRGBO(255, 228, 181, 1),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'monuments');
+                    },
+                    child: Text(
+                      'Available Monuments',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Container(
+                  width: 200.0,
+                  height: 60,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromRGBO(255, 228, 181, 1),
                     ),
                     onPressed: () {},
                     child: Text(
                       'My History ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
                     ),
                   ),
                 ),
@@ -135,13 +157,17 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 0.89),
+                      primary: Color.fromRGBO(255, 228, 181, 1),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'video');
                     },
                     child: Text(
                       'Upload Video Offline ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
