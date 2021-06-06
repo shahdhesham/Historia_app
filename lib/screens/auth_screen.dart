@@ -211,6 +211,9 @@ class _AuthCardState extends State<AuthCard> {
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Email'),
                   keyboardType: TextInputType.emailAddress,
+                  validator: (value) => EmailValidator.validate(value)
+                      ? null
+                      : "Please enter a valid email",
                   validator: (value) {
                     if (value.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
