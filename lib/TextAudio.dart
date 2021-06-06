@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'my_shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_gp/providers/monuments.dart';
+import 'my_shared_preferences.dart';
 
 class TextAudio extends StatefulWidget {
   @override
@@ -107,8 +107,19 @@ class _TextAudioState extends State<TextAudio> {
   //     _newVoiceText = text;
   //   });
   // }
+
   @override
   Widget build(BuildContext context) {
+    MySharedPreferences.instance
+        .getStringValue("name")
+        .then((value) => setState(() {
+              final loaded = Provider.of<Monuments>(
+                context,
+                listen: false,
+              ).findById("-MbHrOpsCiH7sqEbZiQR");
+              print(loaded.location);
+              // _newVoiceText = value;
+            }));
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
@@ -122,34 +133,12 @@ class _TextAudioState extends State<TextAudio> {
               backgroundColor: Colors.black,
               centerTitle: true,
             ),
-            body: Builder(builder: (BuildContext context) {
-              MySharedPreferences.instance
-                  .getStringValue("name")
-                  .then((value) => setState(() {
-                        if (value == "HANGING CHURCH") {
-                          _newVoiceText = "out122222";
-
-                          // final loaded = Provider.of<Monuments>(
-                          //   context,
-                          //   listen: false,
-                          // ).findByName(value);
-                          // if (value == loaded.monumentName) {
-                          //   _newVoiceText = loaded.article;
-                          // }
-                          //  else {
-                          //   _newVoiceText = "empty";
-                          // }
-                        } else {
-                          _newVoiceText = "out";
-                        }
-                      }));
-            return  SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(children: [
-                    _inputSection(),
-                    _btnSection(),
-                  ]));
-            })));
+            body: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(children: [
+                  _inputSection(),
+                  _btnSection(),
+                ]))));
   }
 
   Widget _inputSection() => Container(
