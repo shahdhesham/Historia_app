@@ -88,7 +88,7 @@ class Auth with ChangeNotifier {
         'userId': _userId,
         'expiryDate': _expiryDate.toIso8601String(),
       });
-      await prefs.setString('MIUShop_User', userData);
+      await prefs.setString('Historia_User', userData);
     } catch (error) {
       throw error;
     }

@@ -8,7 +8,7 @@ import 'package:ui_gp/models/monument.dart';
 import 'auth.dart';
 
 class Monuments with ChangeNotifier {
-  Monuments(this.authToken, this.userId, this._monumentDB);
+  Monuments(this.authToken, this.userId, this._monumentDB, {bool listen});
   static const baseUrl = 'https://historia-8452f-default-rtdb.firebaseio.com/';
 
   List<Monument> _monumentDB = [];

@@ -24,7 +24,7 @@ class _UserHomeState extends State<UserHome> {
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('My Home'),
+        title: Text('Home Page'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.gps_fixed),
@@ -45,18 +45,14 @@ class _UserHomeState extends State<UserHome> {
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              // (imageUrl != null)
-              //     ? Image.network(imageUrl)
-              //     : Image.network('https://i.imgur.com/sUFH1Aq.png'),
-
               Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
-                    'Welcome ${widget._userName} ',
+                    'Historia ',
                     style: TextStyle(
                       fontFamily: 'Antens',
-                      fontSize: 70,
+                      fontSize: 60,
                       color: const Color(0xffffffff),
                     ),
                     textAlign: TextAlign.left,
@@ -149,7 +145,6 @@ class _UserHomeState extends State<UserHome> {
                   ),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 60),
                 child: Container(
