@@ -38,10 +38,11 @@ class Monuments with ChangeNotifier {
   }
 
   Future<void> fetchAndSetMonuments({bool filterByUser = false}) async {
-    final filterString =
-        filterByUser ? 'orderBy="ownerId"&equalTo="$userId"' : '';
+    // final filterString =
+    //     filterByUser ? 'orderBy="ownerId"&equalTo="$userId"' : '';
 
-    var url = '$baseUrl/monuments.json?auth=$authToken&$filterString';
+    var url = '$baseUrl/monuments.json';
+   // ?auth=$authToken&$filterString';
     try {
       final response = await http.get(url);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
@@ -55,7 +56,8 @@ class Monuments with ChangeNotifier {
 
       final loadedMonuments = <Monument>[];
       dbData.forEach((monumentId, data) {
-        print('Monuments receiveToken, monumwnt: $monumentId');
+        //hanshelha
+        // print('Monuments receiveToken, monumwnt: $monumentId');
 
         loadedMonuments.add(Monument(
           id: monumentId,
