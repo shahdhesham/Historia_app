@@ -32,6 +32,7 @@ class Monuments with ChangeNotifier {
   Monument findByName(String name) {
     return _monumentDB.firstWhere((monument) => monument.monumentName == name);
   }
+
   List<Monument> returnAll() {
     return _monumentDB;
   }
@@ -55,7 +56,7 @@ class Monuments with ChangeNotifier {
       final loadedMonuments = <Monument>[];
       dbData.forEach((monumentId, data) {
         print('Monuments receiveToken, monumwnt: $monumentId');
-        print(url);
+
         loadedMonuments.add(Monument(
           id: monumentId,
           monumentName: data['monumentName'],

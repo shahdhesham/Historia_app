@@ -118,7 +118,7 @@ class _TextAudioState extends State<TextAudio> {
                 listen: false,
               ).findById("-MbHrOpsCiH7sqEbZiQR");
               print(loaded.location);
-              // _newVoiceText = value;
+              _newVoiceText = loaded.article;
             }));
     return MaterialApp(
         home: Scaffold(
