@@ -41,19 +41,21 @@ class MyApp extends StatelessWidget {
                     primaryColor: Colors.black,
                     visualDensity: VisualDensity.adaptivePlatformDensity,
                   ),
-                  home: AuthScreen(),
-                  //? UserHome()
-                  // : FutureBuilder(
-                  //     future: auth.autoLogin(),
-                  //     builder: (ctx, autResSnapshot) =>
-                  //         autResSnapshot.connectionState ==
-                  //                 ConnectionState.waiting
-                  //             ? AuthScreen()
-                  //             : AuthScreen(),
-                  //   ),
+                  home:
+                      //AuthScreen(),
+                      auth.isAuth
+                          ? UserHome()
+                          : FutureBuilder(
+                              future: auth.autoLogin(),
+                              builder: (ctx, autResSnapshot) =>
+                                  autResSnapshot.connectionState ==
+                                          ConnectionState.waiting
+                                      ? AuthScreen()
+                                      : AuthScreen(),
+                            ),
                   routes: {
                     'forgetpass': (context) => ForgetPassword(),
-                    'userhome': (context) => UserHome(auth.userName),
+                    'userhome': (context) => UserHome(),
                     'predict': (context) => Predict(),
                     'TextAudio': (context) => TextAudio(),
                     'scann': (context) =>

@@ -10,8 +10,9 @@ import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/widgets/drawer.dart';
 
 class UserHome extends StatefulWidget {
-  UserHome(this._userName);
-  final _userName;
+  // UserHome(this._userName);
+  // final _userName;
+  UserHome();
 
   static const routeName = 'userhome';
   @override
