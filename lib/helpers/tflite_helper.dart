@@ -21,7 +21,7 @@ class TFLiteHelper {
     );
   }
 
-  static classifyImage(CameraImage image) async {
+  static classifyImage(var image) async {
 
     await Tflite.runModelOnFrame(
             bytesList: image.planes.map((plane) {
@@ -51,6 +51,7 @@ class TFLiteHelper {
       tfLiteResultsController.add(_outputs);
     });
   }
+  
 
   static void disposeModel(){
     Tflite.close();

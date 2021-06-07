@@ -106,14 +106,14 @@ class _DetectScreenPageState extends State<DetectScreen>
           color: Colors.white,
           child: outputs != null && outputs.isNotEmpty
               ? ListView.builder(
-                  itemCount: outputs.length,
+                  itemCount:1,
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(20.0),
                   itemBuilder: (BuildContext context, int index) {
                     return Column(
                       children: <Widget>[
                         Text(
-                          outputs[index].label,
+                          outputs[outputs.length-1].label,
                           style: TextStyle(
                             color: _colorTween.value,
                             fontSize: 20.0,
@@ -124,11 +124,11 @@ class _DetectScreenPageState extends State<DetectScreen>
                             builder: (context, child) => LinearPercentIndicator(
                                   width: width * 0.88,
                                   lineHeight: 14.0,
-                                  percent: outputs[index].confidence,
+                                  percent: outputs[outputs.length-1].confidence,
                                   progressColor: _colorTween.value,
                                 )),
                         Text(
-                          "${(outputs[index].confidence * 100.0).toStringAsFixed(2)} %",
+                          "${(outputs[outputs.length-1].confidence * 100.0).toStringAsFixed(2)} %",
                           style: TextStyle(
                             color: _colorTween.value,
                             fontSize: 16.0,
