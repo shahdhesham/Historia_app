@@ -116,8 +116,8 @@ class _TextAudioState extends State<TextAudio> {
               final loaded = Provider.of<Monuments>(
                 context,
                 listen: false,
-              ).findById("-MbHrOpsCiH7sqEbZiQR");
-              print(loaded.location);
+              ).findByName(value);
+
               _newVoiceText = loaded.article;
             }));
     return MaterialApp(
