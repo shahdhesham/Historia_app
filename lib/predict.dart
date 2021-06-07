@@ -23,7 +23,7 @@ class _PredictState extends State<Predict> {
     try {
       String res;
       res = await Tflite.loadModel(
-        model: "assets/5juneEgypt.tflite",
+        model: "assets/SEgypt.tflite",
         labels: "assets/Egypt_label.txt",
       );
       print(res);
@@ -34,6 +34,7 @@ class _PredictState extends State<Predict> {
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
+    
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
         imageMean: 224, // defaults to 117.0
@@ -42,9 +43,9 @@ class _PredictState extends State<Predict> {
         threshold: 0.005, // defaults to 0.1
         asynch: true // defaults to true
         );
-
+    
     print(recognitions);
-
+   
     setState(() {
       _recognitions = recognitions;
     });

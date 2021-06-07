@@ -7,21 +7,22 @@ import 'package:tflite/tflite.dart';
 import 'app_helper.dart';
 
 class TFLiteHelper {
-  static StreamController<List<Result>> tfLiteResultsController =
-      new StreamController.broadcast();
+
+  static StreamController<List<Result>> tfLiteResultsController = new StreamController.broadcast();
   static List<Result> _outputs = List();
   static var modelLoaded = false;
 
-  static Future<String> loadModel() async {
+  static Future<String> loadModel() async{
     AppHelper.log("loadModel", "Loading model..");
 
     return Tflite.loadModel(
-      model: "assets/5juneEgypt.tflite",
+      model: "assets/Egypt.tflite",
       labels: "assets/Egypt_label.txt",
     );
   }
 
   static classifyImage(CameraImage image) async {
+
     await Tflite.runModelOnFrame(
             bytesList: image.planes.map((plane) {
               return plane.bytes;
@@ -51,7 +52,7 @@ class TFLiteHelper {
     });
   }
 
-  static void disposeModel() {
+  static void disposeModel(){
     Tflite.close();
     tfLiteResultsController.close();
   }

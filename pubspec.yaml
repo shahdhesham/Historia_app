@@ -39,7 +39,6 @@ dependencies:
   percent_indicator: ^2.1.9
   flutter_tts:
   starflut:
-  settings_ui: ^1.0.0
   
   firebase_database: ^4.4.0
 
@@ -77,7 +76,8 @@ flutter:
     - assets/Hanging Church.txt
     - assets/Amr ibn Al-Aas Mosque.txt
     - assets/SEgypt.tflite
-    - assets/5juneEgypt.tflite
+    - assets/Egypt.tflite
+
    
 
   #   - images/a_dot_ham.jpeg

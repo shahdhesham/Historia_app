@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
                     'admin': (context) => AdminPage(),
                     'monuments': (context) => MonumentsMenu(auth.userName),
                     'monument-detail': (context) => MonumentDetail(),
-                    'settings': (context) => SettingsPage(),
+                    // 'settings': (context) => SettingsPage(),
                     'FAQs': (context) => FAQPage(),
                   },
                 )));
