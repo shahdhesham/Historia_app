@@ -20,10 +20,10 @@ class UserHome extends StatefulWidget {
 
 class _UserHomeState extends State<UserHome> {
   String imageUrl;
-    var _isInit = true;
+  var _isInit = true;
   var _isLoading = true;
-  
- @override
+
+  @override
   void initState() {
     super.initState();
   }
@@ -43,6 +43,7 @@ class _UserHomeState extends State<UserHome> {
     _isInit = false;
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,37 +198,4 @@ class _UserHomeState extends State<UserHome> {
       ),
     );
   }
-
-  // uploadImage() async {
-  //   final _firebaseStorage = FirebaseStorage.instance;
-  //   final _imagePicker = ImagePicker();
-  //   PickedFile image;
-  //   //Check Permissions
-  //   await Permission.photos.request();
-
-  //   var permissionStatus = await Permission.photos.status;
-
-  //   if (permissionStatus.isGranted) {
-  //     //Select Image
-  //     image = await _imagePicker.getImage(source: ImageSource.gallery);
-  //     var file = File(image.path);
-
-  //     if (image != null) {
-  //       //Upload to Firebase
-  //       var snapshot = await _firebaseStorage
-  //           .ref()
-  //           .child('images/imageName')
-  //           .putFile(file)
-  //           .onComplete;
-  //       var downloadUrl = await snapshot.ref.getDownloadURL();
-  //       setState(() {
-  //         imageUrl = downloadUrl;
-  //       });
-  //     } else {
-  //       print('No Image Path Received');
-  //     }
-  //   } else {
-  //     print('Permission not granted. Try Again with permission access');
-  //   }
-  // }
 }
