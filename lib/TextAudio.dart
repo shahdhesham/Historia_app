@@ -107,12 +107,16 @@ class _TextAudioState extends State<TextAudio> {
   //     _newVoiceText = text;
   //   });
   // }
+ Future<void> _refreshMonuments(BuildContext context) async {
+    await Provider.of<Monuments>(context, listen: false).fetchAndSetMonuments();
+  }
 
   @override
   Widget build(BuildContext context) {
     MySharedPreferences.instance
         .getStringValue("name")
         .then((value) => setState(() {
+          
               final loaded = Provider.of<Monuments>(
                 context,
                 listen: false,

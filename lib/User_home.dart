@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
+import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/widgets/drawer.dart';
 
 class UserHome extends StatefulWidget {
@@ -18,7 +20,29 @@ class UserHome extends StatefulWidget {
 
 class _UserHomeState extends State<UserHome> {
   String imageUrl;
+    var _isInit = true;
+  var _isLoading = true;
+  
+ @override
+  void initState() {
+    super.initState();
+  }
 
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Monuments>(context).fetchAndSetMonuments().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
