@@ -9,9 +9,11 @@ import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/scann.dart';
 import 'package:ui_gp/screens/admin.dart';
 import 'package:ui_gp/screens/auth_screen.dart';
+import 'package:ui_gp/screens/faq.dart';
 import 'package:ui_gp/screens/monumentDetail.dart';
 import 'package:ui_gp/screens/monumentsMenu.dart';
 import 'package:ui_gp/video.dart';
+import 'package:ui_gp/widgets/settings.dart';
 
 void main() {
   runApp(
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
                     'admin': (context) => AdminPage(),
                     'monuments': (context) => MonumentsMenu(auth.userName),
                     'monument-detail': (context) => MonumentDetail(),
+                    'settings': (context) => SettingsPage(),
+                    'FAQs': (context) => FAQPage(),
                   },
                 )));
   }

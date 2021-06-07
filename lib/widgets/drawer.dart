@@ -37,7 +37,7 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.help_center),
             title: Text('FAQs'),
-            onTap: () => Navigator.pushNamed(context, 'faqs'),
+            onTap: () => Navigator.pushNamed(context, 'FAQs'),
           ),
           ListTile(
             leading: Icon(Icons.help),

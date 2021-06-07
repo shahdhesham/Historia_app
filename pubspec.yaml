@@ -39,6 +39,7 @@ dependencies:
   percent_indicator: ^2.1.9
   flutter_tts:
   starflut:
+  settings_ui: ^1.0.0
   
   firebase_database: ^4.4.0
 
