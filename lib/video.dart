@@ -1,5 +1,12 @@
 import 'dart:math';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:tflite/tflite.dart';
+import 'package:ui_gp/helpers/app_helper.dart';
+import 'package:ui_gp/helpers/video_helper.dart';
+import 'package:ui_gp/helpers/tflite_helper.dart';
+import 'package:ui_gp/models/result.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -26,20 +33,64 @@ class Video extends StatefulWidget {
 }
 
 class _VideoState extends State<Video> {
+  List<Result> outputs;
   var _isClean = false;
+  void initState() {
+    Tflite.loadModel(
+      model: "assets/Egypt.tflite",
+      labels: "assets/Egypt_label.txt",
+    );
+  }
+
+  void disposeModel() {
+    Tflite.close();
+  }
+
+  classifyImage(var image) {
+    Tflite.runModelOnFrame(
+            bytesList: image.planes.map((plane) {
+              return plane.bytes;
+            }).toList(),
+            numResults: 5)
+        .then((value) {
+      if (value.isNotEmpty) {
+        AppHelper.log("classifyImage", "Results loaded. ${value.length}");
+
+        //Clear previous results
+        outputs.clear();
+
+        value.forEach((element) {
+          outputs.add(Result(
+              element['confidence'], element['index'], element['label']));
+
+          AppHelper.log("classifyImage",
+              "${element['confidence']} , ${element['index']}, ${element['label']}");
+        });
+      }
+
+      //Sort results according to most confidence
+      outputs.sort((a, b) => a.confidence.compareTo(b.confidence));
+      print(outputs[outputs.length-1]);
+    });
+  }
+
+  predictFrames(images)  {
+    for (int i = 0; i < images.length; i++) {
+      classifyImage(images[i]);
+    }
+  }
+
   Future _getImages() async {
     ImagePicker picker = ImagePicker();
     var file = await picker.getVideo(source: ImageSource.gallery);
 
     var images = await ExportVideoFrame.exportImage(file.path, 35, 0.5);
     var result = images.map((file) => Image.file(file)).toList();
+    predictFrames(result);
     setState(() {
-      widget.images.addAll(result);
       _isClean = true;
     });
   }
-
- 
 
   Future _cleanCache() async {
     var result = await ExportVideoFrame.cleanImageCache();
@@ -58,8 +109,6 @@ class _VideoState extends State<Video> {
     }
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,20 +119,6 @@ class _VideoState extends State<Video> {
         padding: EdgeInsets.zero,
         child: Column(
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: GridView.extent(
-                  maxCrossAxisExtent: 400,
-                  childAspectRatio: 1.0,
-                  padding: const EdgeInsets.all(4),
-                  mainAxisSpacing: 1,
-                  crossAxisSpacing: 1,
-                  children: widget.images.length > 0
-                      ? widget.images
-                          .map((image) => ImageItem(image: image))
-                          .toList()
-                      : [Container()]),
-            ),
             Expanded(
               flex: 0,
               child: Center(
@@ -99,7 +134,6 @@ class _VideoState extends State<Video> {
                 ),
               ),
             ),
-            
           ],
         ),
       ),
