@@ -84,7 +84,7 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 1),
+                      primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'scann');
@@ -92,6 +92,7 @@ class _UserHomeState extends State<UserHome> {
                     child: Text(
                       'Start Scanning',
                       style: TextStyle(
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                       ),
@@ -106,7 +107,7 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 1),
+                      primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'predict');
@@ -114,28 +115,7 @@ class _UserHomeState extends State<UserHome> {
                     child: Text(
                       'Upload Picture Offline',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Container(
-                  width: 200.0,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 1),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'monuments');
-                    },
-                    child: Text(
-                      'Available Monuments',
-                      style: TextStyle(
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                       ),
@@ -150,12 +130,13 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 1),
+                      primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
                     onPressed: () {},
                     child: Text(
                       'My History ',
                       style: TextStyle(
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                       ),
@@ -170,7 +151,7 @@ class _UserHomeState extends State<UserHome> {
                   height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 1),
+                      primary: Color.fromRGBO(255, 228, 181, 0.89),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'video');
@@ -178,8 +159,9 @@ class _UserHomeState extends State<UserHome> {
                     child: Text(
                       'Upload Video Offline ',
                       style: TextStyle(
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 17,
                       ),
                     ),
                   ),
