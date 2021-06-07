@@ -34,8 +34,7 @@ class _PredictState extends State<Predict> {
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
-    print("//////////////////////////////////////////////");
-    print("predict");
+    
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
         imageMean: 224, // defaults to 117.0
@@ -44,11 +43,9 @@ class _PredictState extends State<Predict> {
         threshold: 0.005, // defaults to 0.1
         asynch: true // defaults to true
         );
-    print("//////////////////////////////////////////////");
-
+    
     print(recognitions);
-    print("//////////////////////////////////////////////");
-
+   
     setState(() {
       _recognitions = recognitions;
     });
@@ -59,7 +56,6 @@ class _PredictState extends State<Predict> {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setString('name', name);
 
-    print("hi");
     print(name);
   }
   // String name='';
@@ -67,7 +63,7 @@ class _PredictState extends State<Predict> {
   // send image to predict method selected from gallery or camera
   sendImage(File image) async {
     if (image == null) return;
-    print("object");
+
     await predict(image);
 
     // get the width and height of selected image
@@ -90,7 +86,6 @@ class _PredictState extends State<Predict> {
     setState(() {});
     _image = File(image.path);
     sendImage(_image);
-    print("here");
   }
 
   // select image from camera

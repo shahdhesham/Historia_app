@@ -66,7 +66,7 @@ class Auth with ChangeNotifier {
 
       _email = responseData['email'];
       _userName = _email.substring(0, _email.indexOf('@'));
-      print('/////Test $_userName');
+      print(' $_userName signed in');
       if (_userId == null) {
         throw HttpException('User ID is null');
       }
