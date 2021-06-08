@@ -60,8 +60,8 @@ class MyApp extends StatelessWidget {
                     'userhome': (context) => UserHome(),
                     'predict': (context) => Predict(),
                     'TextAudio': (context) => TextAudio(),
-                    'scann': (context) =>
-                        DetectScreen(title: 'Detect Monument'),
+                    //'scann': (context) =>
+                    //DetectScreen(title: 'Detect Monument'),
                     'video': (context) => Video(images: <Image>[]),
                     'admin': (context) => AdminPage(),
                     'monuments': (context) => MonumentsMenu(auth.userName),
