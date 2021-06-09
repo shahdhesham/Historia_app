@@ -43,7 +43,6 @@ dependencies:
   
   firebase_database: ^4.4.0
   url_launcher:
-  firebase_core:
   firebase_storage:
 
   shared_preferences: 

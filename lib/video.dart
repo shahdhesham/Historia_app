@@ -8,9 +8,21 @@ import 'package:ui_gp/helpers/video_helper.dart';
 import 'package:ui_gp/helpers/tflite_helper.dart';
 import 'package:ui_gp/models/result.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:tflite/tflite.dart';
+import 'package:image_picker/image_picker.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'my_shared_preferences.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:export_video_frame/export_video_frame.dart';
+
+class CountItem {
+  int _counter = 0;
+  var label = "";
+}
 
 class ImageItem extends StatelessWidget {
   ImageItem({this.image}) : super(key: ObjectKey(image));
@@ -33,11 +45,13 @@ class Video extends StatefulWidget {
 }
 
 class _VideoState extends State<Video> {
-  List<Result> outputs;
+  static List<int> _outputs = List(4);
+
+  static var finalLabel = "";
   var _isClean = false;
   void initState() {
     Tflite.loadModel(
-      model: "assets/Egypt.tflite",
+      model: "assets/SEgypt.tflite",
       labels: "assets/Egypt_label.txt",
     );
   }
@@ -46,55 +60,66 @@ class _VideoState extends State<Video> {
     Tflite.close();
   }
 
-  classifyImage(var image) {
-    Tflite.runModelOnFrame(
-            bytesList: image.planes.map((plane) {
-              return plane.bytes;
-            }).toList(),
-            numResults: 5)
-        .then((value) {
-      if (value.isNotEmpty) {
-        AppHelper.log("classifyImage", "Results loaded. ${value.length}");
-
-        //Clear previous results
-        outputs.clear();
-
-        value.forEach((element) {
-          outputs.add(Result(
-              element['confidence'], element['index'], element['label']));
-
-          AppHelper.log("classifyImage",
-              "${element['confidence']} , ${element['index']}, ${element['label']}");
-        });
-      }
-
-      //Sort results according to most confidence
-      outputs.sort((a, b) => a.confidence.compareTo(b.confidence));
-      print(outputs[outputs.length-1]);
-    });
-  }
-
-  predictFrames(images)  {
-    for (int i = 0; i < images.length; i++) {
-      classifyImage(images[i]);
+  Future predict(File image) async {
+    var recognitions = await Tflite.runModelOnImage(
+        path: image.path, // required
+        imageMean: 224, // defaults to 117.0
+        imageStd: 1.0, // defaults to 1.0
+        numResults: 4, // defaults to 5
+        threshold: 0.005, // defaults to 0.1
+        asynch: true // defaults to true
+        );
+    print(recognitions);
+    print(recognitions[0]);
+    print(recognitions[0]['label']);
+    print("reco here.//////////////////////");
+    if (recognitions[0]['label'] == "Amr ibn Al-Aas Mosque") {
+      _outputs[0] = _outputs[0] + 1;
+    } else if (recognitions[0]['label'] == "Cavern Church- Abu Serga") {
+      _outputs[1] = _outputs[1] + 1;
+    } else if (recognitions[0]['label'] == "Babylon Fortress") {
+      _outputs[2] = _outputs[2] + 1;
+    } else if (recognitions[0]['label'] == "Hanging Church") {
+      _outputs[3] = _outputs[3] + 1;
     }
   }
 
   Future _getImages() async {
+    for (int i = 0; i < 4; i++) {
+      _outputs[i] = 0;
+    }
     ImagePicker picker = ImagePicker();
     var file = await picker.getVideo(source: ImageSource.gallery);
 
-    var images = await ExportVideoFrame.exportImage(file.path, 35, 0.5);
-    var result = images.map((file) => Image.file(file)).toList();
-    predictFrames(result);
+    var images = await ExportVideoFrame.exportImage(file.path, 40, 0.5);
+    for (int i = 0; i < images.length; i++) {
+      await predict(images[i]);
+    }
+
+    int maxIndex = 0;
+    var labelPredicted = "";
+    for (int i = 1; i < 4; i++) {
+      if (_outputs[maxIndex] > _outputs[i]) {
+        maxIndex = i;
+      }
+      if (maxIndex == 0) {
+        labelPredicted = "Amr ibn Al-Aas Mosque";
+      } else if (maxIndex == 1) {
+        labelPredicted = "Cavern Church- Abu Serga";
+      } else if (maxIndex == 2) {
+        labelPredicted = "Babylon Fortress";
+      } else if (maxIndex == 3) {
+        labelPredicted = "Hanging Church";
+      }
+    }
     setState(() {
       _isClean = true;
+      finalLabel = labelPredicted;
     });
   }
 
   Future _cleanCache() async {
     var result = await ExportVideoFrame.cleanImageCache();
-    print(result);
     setState(() {
       widget.images.clear();
       _isClean = false;
