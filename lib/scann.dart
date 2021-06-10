@@ -114,9 +114,13 @@ class _DetectScreenPageState extends State<DetectScreen>
                       children: <Widget>[
                         Text(
                           outputs[outputs.length-1].label,
+                          // style: TextStyle(
+                          //   color: _colorTween.value,
+                          //   fontSize: 20.0,
                           style: TextStyle(
-                            color: _colorTween.value,
-                            fontSize: 20.0,
+                        fontFamily: 'Antens',
+                        fontSize: 40,
+                      
                           ),
                         ),
                       ],

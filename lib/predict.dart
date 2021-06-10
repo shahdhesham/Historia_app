@@ -26,7 +26,8 @@ class _PredictState extends State<Predict> {
       setState(() {
         TFLiteHelper.modelLoaded = true;
       });
-    });}
+    });
+  }
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
@@ -50,6 +51,7 @@ class _PredictState extends State<Predict> {
 
     print(name);
   }
+
   sendImage(File image) async {
     if (image == null) return;
 
@@ -85,7 +87,6 @@ class _PredictState extends State<Predict> {
     sendImage(image);
   }
 
-
   Widget printValue(rcg) {
     if (rcg == null) {
       return Text('',
@@ -101,7 +102,7 @@ class _PredictState extends State<Predict> {
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Center(
         child: Text(
-          "Prediction: " + _recognitions[0]['label'].toString().toUpperCase(),
+          _recognitions[0]['label'].toString().toUpperCase(),
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
         ),
@@ -211,7 +212,8 @@ class _PredictState extends State<Predict> {
                   padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 120),
-                    child: Container(
+                    child:
+                     Container(
                       child: FlatButton.icon(
                         onPressed: () {
                           Navigator.pushNamed(context, 'TextAudio');

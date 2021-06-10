@@ -1,25 +1,10 @@
-import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
-import 'package:ui_gp/helpers/image_helper.dart';
-import 'package:ui_gp/helpers/tflite_helper.dart';
-import 'package:ui_gp/models/result.dart';
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:tflite/tflite.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-import 'helpers/sharedPrefrences_helper.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:export_video_frame/export_video_frame.dart';
-
-class CountItem {
-  int _counter = 0;
-  var label = "";
-}
+import 'helpers/sharedPrefrences_helper.dart';
 
 class ImageItem extends StatelessWidget {
   ImageItem({this.image}) : super(key: ObjectKey(image));
@@ -43,8 +28,8 @@ class Video extends StatefulWidget {
 
 class _VideoState extends State<Video> {
   static List<int> _outputs = List(4);
-
-  static var finalLabel = "";
+  var _isloading = false;
+  var finalLabel = "";
   var _isClean = false;
   void initState() {
     Tflite.loadModel(
@@ -67,9 +52,7 @@ class _VideoState extends State<Video> {
         asynch: true // defaults to true
         );
     print(recognitions);
-    print(recognitions[0]);
-    print(recognitions[0]['label']);
-    print("reco here.//////////////////////");
+
     if (recognitions[0]['label'] == "Amr ibn Al-Aas Mosque") {
       _outputs[0] = _outputs[0] + 1;
     } else if (recognitions[0]['label'] == "Cavern Church- Abu Serga") {
@@ -82,6 +65,9 @@ class _VideoState extends State<Video> {
   }
 
   Future _getImages() async {
+    setState(() {
+      _isloading = true;
+    });
     for (int i = 0; i < 4; i++) {
       _outputs[i] = 0;
     }
@@ -96,22 +82,34 @@ class _VideoState extends State<Video> {
     int maxIndex = 0;
     var labelPredicted = "";
     for (int i = 1; i < 4; i++) {
-      if (_outputs[maxIndex] > _outputs[i]) {
+      if (_outputs[i] > _outputs[maxIndex]) {
+        print(_outputs[i]);
         maxIndex = i;
       }
-      if (maxIndex == 0) {
-        labelPredicted = "Amr ibn Al-Aas Mosque";
-      } else if (maxIndex == 1) {
-        labelPredicted = "Cavern Church- Abu Serga";
-      } else if (maxIndex == 2) {
-        labelPredicted = "Babylon Fortress";
-      } else if (maxIndex == 3) {
-        labelPredicted = "Hanging Church";
-      }
     }
+    print("max index heree");
+    print(maxIndex);
+
+    if (maxIndex == 0) {
+      labelPredicted = "Amr ibn Al-Aas Mosque";
+    } else if (maxIndex == 1) {
+      labelPredicted = "Cavern Church- Abu Serga";
+    } else if (maxIndex == 2) {
+      labelPredicted = "Babylon Fortress";
+    } else if (maxIndex == 3) {
+      labelPredicted = "Hanging Church";
+    }
+
+    print("//////////////////");
+    print(labelPredicted);
+    String name = labelPredicted.toUpperCase();
+    MySharedPreferences.instance.setStringValue("name", name);
+
+    print(name);
     setState(() {
       _isClean = true;
       finalLabel = labelPredicted;
+      _isloading = false;
     });
   }
 
@@ -135,7 +133,7 @@ class _VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Export Image"),
+        title: Text("Upload Video"),
       ),
       body: Container(
         padding: EdgeInsets.zero,
@@ -143,19 +141,82 @@ class _VideoState extends State<Video> {
           children: <Widget>[
             Expanded(
               flex: 0,
-              child: Center(
-                child: MaterialButton(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  height: 40,
-                  minWidth: 100,
-                  onPressed: () {
-                    _handleClickFirst();
-                  },
-                  color: Colors.orange,
-                  child: Text("Export image list"),
+              child: Padding(
+                padding: const EdgeInsets.all(100.0),
+                child: Center(
+                  child: FlatButton.icon(
+                    onPressed: () {
+                      _handleClickFirst();
+                    },
+                    icon: Icon(
+                      Icons.video_collection_sharp,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    color: Color.fromRGBO(255, 228, 181, 1),
+                    label: Text(
+                      "Upload",
+                      style: TextStyle(color: Colors.black, fontSize: 20),
+                    ),
+                  ),
                 ),
               ),
             ),
+            if (_isloading)
+              Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    Text(
+                      "Wait While Magic is Happening",
+                      style: TextStyle(
+                        fontFamily: 'Antens',
+                        fontSize: 40,
+                        color: const Color.fromRGBO(218, 165, 32, 1),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ])
+            else
+              Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 0,
+                      child: Center(
+                        child: Container(
+                          child: Text(
+                            finalLabel,
+                            style: TextStyle(
+                              fontFamily: 'Antens',
+                              fontSize: 40,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: FlatButton.icon(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'TextAudio');
+                        },
+                        icon: Icon(
+                          Icons.lightbulb_outline,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        color: Color.fromRGBO(255, 228, 181, 1),
+                        label: Text(
+                          "Learn More",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                      ),
+                      margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                    ),
+                  ])
           ],
         ),
       ),
