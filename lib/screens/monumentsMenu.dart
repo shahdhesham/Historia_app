@@ -11,9 +11,6 @@ enum FilterOptions {
 }
 
 class MonumentsMenu extends StatefulWidget {
-  MonumentsMenu(this._userName);
-  final _userName;
-
   @override
   _MonumentsMenuState createState() => _MonumentsMenuState();
 }
@@ -53,7 +50,7 @@ class _MonumentsMenuState extends State<MonumentsMenu> {
           ///search bar by using textfields
           ///3ayzen nshlhaaaaz
           title: !isSearch
-              ? Text('Hello ${widget._userName}! ')
+              ? Text('Available Monuments ')
               : TextField(
                   decoration:
                       InputDecoration(hintText: 'Search For Monuments Here'),
