@@ -27,7 +27,7 @@ class _DetectScreenPageState extends State<DetectScreen>
     super.initState();
 
     //Load TFLite Model
-    TFLiteHelper.loadModel().then((value) {
+    TFLiteHelper.loadModelCamera().then((value) {
       setState(() {
         TFLiteHelper.modelLoaded = true;
       });

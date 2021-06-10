@@ -16,7 +16,7 @@ class VideoHelper {
         isDetecting = true;
         try {
           for(int i=0; i<images.length;i++){
-          TFLiteHelper.classifyImage(images[i]);}
+          TFLiteHelper.classifyImageCamera(images[i]);}
         } catch (e) {
           print(e);
         }

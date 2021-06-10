@@ -12,7 +12,7 @@ class TFLiteHelper {
   static List<Result> _outputs = List();
   static var modelLoaded = false;
 
-  static Future<String> loadModel() async{
+  static Future<String> loadModelCamera() async{
     AppHelper.log("loadModel", "Loading model..");
 
     return Tflite.loadModel(
@@ -21,7 +21,7 @@ class TFLiteHelper {
     );
   }
 
-  static classifyImage(CameraImage image) async {
+  static classifyImageCamera(CameraImage image) async {
 
     await Tflite.runModelOnFrame(
             bytesList: image.planes.map((plane) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:tflite/tflite.dart';
 import 'package:ui_gp/helpers/app_helper.dart';
-import 'package:ui_gp/helpers/video_helper.dart';
+import 'package:ui_gp/helpers/image_helper.dart';
 import 'package:ui_gp/helpers/tflite_helper.dart';
 import 'package:ui_gp/models/result.dart';
 import 'package:flutter/material.dart';
