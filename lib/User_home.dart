@@ -113,7 +113,7 @@ class _UserHomeState extends State<UserHome> {
                       Navigator.pushNamed(context, 'predict');
                     },
                     child: Text(
-                      'Upload Picture Offline',
+                      'Upload Picture ',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class _UserHomeState extends State<UserHome> {
                       Navigator.pushNamed(context, 'video');
                     },
                     child: Text(
-                      'Upload Video Offline ',
+                      'Upload Video  ',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,

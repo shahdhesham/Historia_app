@@ -34,7 +34,6 @@ class _PredictState extends State<Predict> {
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
-    
     var recognitions = await Tflite.runModelOnImage(
         path: image.path, // required
         imageMean: 224, // defaults to 117.0
@@ -43,9 +42,9 @@ class _PredictState extends State<Predict> {
         threshold: 0.005, // defaults to 0.1
         asynch: true // defaults to true
         );
-    
+
     print(recognitions);
-   
+
     setState(() {
       _recognitions = recognitions;
     });
@@ -228,21 +227,27 @@ class _PredictState extends State<Predict> {
             Row(children: <Widget>[
               Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: Container(
-                      child: ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'TextAudio');
-                    },
-                    icon: Icon(
-                      Icons.library_books_rounded,
-                      color: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 120),
+                    child: Container(
+                      child: FlatButton.icon(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'TextAudio');
+                        },
+                        icon: Icon(
+                          Icons.lightbulb_outline,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        color: Color.fromRGBO(255, 228, 181, 1),
+                        label: Text(
+                          "Learn More",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                      ),
+                      margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(24),
-                    ),
-                    label: Text(''),
-                  ))),
+                  )),
             ])
           ],
         ));

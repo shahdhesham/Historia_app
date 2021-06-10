@@ -31,7 +31,7 @@ class _TextAudioState extends State<TextAudio> {
   bool isCurrentLanguageInstalled = false;
 
   // String _newVoiceText="Here  Amr ibn el ass mosque ";
-  String _newVoiceText = "";
+  String _newVoiceText = "Please upload a picture";
 
   TtsState ttsState = TtsState.stopped;
 
@@ -107,7 +107,7 @@ class _TextAudioState extends State<TextAudio> {
   //     _newVoiceText = text;
   //   });
   // }
- Future<void> _refreshMonuments(BuildContext context) async {
+  Future<void> _refreshMonuments(BuildContext context) async {
     await Provider.of<Monuments>(context, listen: false).fetchAndSetMonuments();
   }
 
@@ -116,7 +116,6 @@ class _TextAudioState extends State<TextAudio> {
     MySharedPreferences.instance
         .getStringValue("name")
         .then((value) => setState(() {
-          
               final loaded = Provider.of<Monuments>(
                 context,
                 listen: false,
