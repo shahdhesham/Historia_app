@@ -9,9 +9,11 @@ import 'package:ui_gp/providers/monuments.dart';
 import 'package:ui_gp/scann.dart';
 import 'package:ui_gp/screens/admin.dart';
 import 'package:ui_gp/screens/auth_screen.dart';
+import 'package:ui_gp/screens/crudmonument.dart';
 import 'package:ui_gp/screens/faq.dart';
 import 'package:ui_gp/screens/monumentDetail.dart';
 import 'package:ui_gp/screens/monumentsMenu.dart';
+import 'package:ui_gp/screens/profile.dart';
 import 'package:ui_gp/video.dart';
 import 'package:ui_gp/widgets/settings.dart';
 
@@ -60,13 +62,17 @@ class MyApp extends StatelessWidget {
                     'userhome': (context) => UserHome(),
                     'predict': (context) => Predict(),
                     'TextAudio': (context) => TextAudio(),
-                    'scann': (context) => DetectScreen(title: 'Detect Monument'),
+                    'scann': (context) =>
+                        DetectScreen(title: 'Detect Monument'),
                     'video': (context) => Video(images: <Image>[]),
                     'admin': (context) => AdminPage(),
-                    'monuments': (context) => MonumentsMenu(auth.userName),
+                    'monuments': (context) => MonumentsMenu(),
                     'monument-detail': (context) => MonumentDetail(),
-                    // 'settings': (context) => SettingsPage(),
+                    'edit-monument': (context) => CrudMonument(),
+                    'settings': (context) => SettingsPage(),
                     'FAQs': (context) => FAQPage(),
+                    'profile': (context) =>
+                        ProfileApp(auth.userName, auth.email),
                   },
                 )));
   }

@@ -1,10 +1,5 @@
-// import 'dart:html';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-//import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_gp/models/monument.dart';
 import 'package:ui_gp/providers/monuments.dart';
@@ -12,26 +7,23 @@ import 'package:ui_gp/providers/monuments.dart';
 const pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
 final validatePhone = RegExp(pattern);
 
-class crudMonument extends StatefulWidget {
+class CrudMonument extends StatefulWidget {
   static const routeName = 'edit-monument';
   @override
-  _crudMonumentState createState() => _crudMonumentState();
+  _CrudMonumentState createState() => _CrudMonumentState();
 }
 
-class _crudMonumentState extends State<crudMonument> {
+class _CrudMonumentState extends State<CrudMonument> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
-
-  ///image Picker
   final _formKey = GlobalKey<FormState>();
   var _editedMonument = Monument(
     id: null,
     monumentName: '',
-    //rating: 0.0,
     article: '',
     location: '',
     imageUrl: '',
@@ -39,13 +31,12 @@ class _crudMonumentState extends State<crudMonument> {
     latitude: 0.0,
   );
   var _initValues = {
-    //'rating': 0.0,
+    'monumentName': '',
     'article': '',
     'location': '',
-    // 'review': '',
     'imageUrl': '',
-    'Lng': 0.0,
-    'Ltd': 0.0,
+    'Longitude': 0.0,
+    'Latitude': 0.0,
   };
   var _isInit = true;
   var _isLoading = false;
@@ -70,8 +61,8 @@ class _crudMonumentState extends State<crudMonument> {
           'location': _editedMonument.location,
           'article': _editedMonument.article,
           'imageUrl': _editedMonument.imageUrl,
-          'Lng': _editedMonument.longitude,
-          'Ltd': _editedMonument.latitude,
+          'Longitude': _editedMonument.longitude,
+          'Latitude': _editedMonument.latitude,
         };
         _imageUrlController.text = _editedMonument.imageUrl;
       }

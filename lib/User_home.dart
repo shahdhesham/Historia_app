@@ -123,27 +123,27 @@ class _UserHomeState extends State<UserHome> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Container(
-                  width: 200.0,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(255, 228, 181, 0.89),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'My History ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 60),
+              //   child: Container(
+              //     width: 200.0,
+              //     height: 60,
+              //     child: ElevatedButton(
+              //       style: ElevatedButton.styleFrom(
+              //         primary: Color.fromRGBO(255, 228, 181, 0.89),
+              //       ),
+              //       onPressed: () {},
+              //       child: Text(
+              //         'My History ',
+              //         style: TextStyle(
+              //           color: Colors.black,
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 17,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 60),
                 child: Container(
