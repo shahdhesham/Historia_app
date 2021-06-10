@@ -20,6 +20,14 @@ class TFLiteHelper {
       labels: "assets/Egypt_label.txt",
     );
   }
+static Future<String> loadModelImage() async{
+    AppHelper.log("loadModel", "Loading model..");
+
+    return Tflite.loadModel(
+      model: "assets/SEgypt.tflite",
+      labels: "assets/Egypt_label.txt",
+    );
+  }
 
   static classifyImageCamera(CameraImage image) async {
 

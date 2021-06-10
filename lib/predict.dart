@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-import 'my_shared_preferences.dart';
+import 'helpers/sharedPrefrences_helper.dart';
+import 'helpers/tflite_helper.dart';
 
 class Predict extends StatefulWidget {
   @override
@@ -18,19 +18,15 @@ class _PredictState extends State<Predict> {
   double _imageHeight;
   var _recognitions;
 
-  loadModel() async {
-    Tflite.close();
-    try {
-      String res;
-      res = await Tflite.loadModel(
-        model: "assets/SEgypt.tflite",
-        labels: "assets/Egypt_label.txt",
-      );
-      print(res);
-    } on PlatformException {
-      print("Failed to load the model");
-    }
-  }
+  void initState() {
+    super.initState();
+
+    //Load TFLite Model
+    TFLiteHelper.loadModelImage().then((value) {
+      setState(() {
+        TFLiteHelper.modelLoaded = true;
+      });
+    });}
 
   // run prediction using TFLite on given image
   Future predict(File image) async {
@@ -43,9 +39,6 @@ class _PredictState extends State<Predict> {
         threshold: 0.005, // defaults to 0.1
         asynch: true // defaults to true
         );
-    
-    print(recognitions);
-   
     setState(() {
       _recognitions = recognitions;
     });
@@ -53,14 +46,8 @@ class _PredictState extends State<Predict> {
     String name = (_recognitions[0]['label'].toString().toUpperCase());
     MySharedPreferences.instance.setStringValue("name", name);
 
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setString('name', name);
-
     print(name);
   }
-  // String name='';
-
-  // send image to predict method selected from gallery or camera
   sendImage(File image) async {
     if (image == null) return;
 
@@ -96,14 +83,6 @@ class _PredictState extends State<Predict> {
     sendImage(image);
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    loadModel().then((val) {
-      setState(() {});
-    });
-  }
 
   Widget printValue(rcg) {
     if (rcg == null) {
