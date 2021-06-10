@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ui_gp/screens/crudmonument.dart';
+
 import 'package:ui_gp/providers/monuments.dart';
+import 'package:ui_gp/screens/crudmonument.dart';
 
 class AdminMonument extends StatelessWidget {
   AdminMonument(this.id, this.title, this.imageUrl);
@@ -25,7 +26,7 @@ class AdminMonument extends StatelessWidget {
               icon: Icon(Icons.edit),
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(crudMonument.routeName, arguments: id);
+                    .pushNamed(CrudMonument.routeName, arguments: id);
               },
               color: Theme.of(context).primaryColor,
             ),

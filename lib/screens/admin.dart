@@ -24,7 +24,7 @@ class AdminPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => crudMonument()),
+                MaterialPageRoute(builder: (context) => CrudMonument()),
               );
             },
           ),

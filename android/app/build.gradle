@@ -78,8 +78,8 @@ dependencies {
     // Alternatively, use ArSceneView without the UX dependency.
     implementation 'com.google.ar.sceneform:core:1.8.0'
     implementation 'com.google.ar:core:1.8.0'
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    //implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-database'
-    //implementation platform ('com.google.firebase:firebasebom:26.2.0')
+    implementation platform ('com.google.firebase:firebasebom:26.2.0')
 }
