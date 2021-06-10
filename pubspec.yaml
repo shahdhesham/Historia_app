@@ -47,7 +47,7 @@ dependencies:
 
   shared_preferences: 
   provider: 
-  settings_ui: ^1.0.0
+  settings_ui: 
   
   
   
