@@ -1,20 +1,17 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:tflite/tflite.dart';
-import 'package:ui_gp/helpers/app_helper.dart';
-import 'package:ui_gp/helpers/video_helper.dart';
+import 'package:ui_gp/helpers/image_helper.dart';
 import 'package:ui_gp/helpers/tflite_helper.dart';
 import 'package:ui_gp/models/result.dart';
-import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
-import 'my_shared_preferences.dart';
+import 'helpers/sharedPrefrences_helper.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:export_video_frame/export_video_frame.dart';

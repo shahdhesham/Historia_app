@@ -27,7 +27,7 @@ class _DetectScreenPageState extends State<DetectScreen>
     super.initState();
 
     //Load TFLite Model
-    TFLiteHelper.loadModel().then((value) {
+    TFLiteHelper.loadModelCamera().then((value) {
       setState(() {
         TFLiteHelper.modelLoaded = true;
       });
@@ -117,21 +117,6 @@ class _DetectScreenPageState extends State<DetectScreen>
                           style: TextStyle(
                             color: _colorTween.value,
                             fontSize: 20.0,
-                          ),
-                        ),
-                        AnimatedBuilder(
-                            animation: _colorAnimController,
-                            builder: (context, child) => LinearPercentIndicator(
-                                  width: width * 0.88,
-                                  lineHeight: 14.0,
-                                  percent: outputs[outputs.length-1].confidence,
-                                  progressColor: _colorTween.value,
-                                )),
-                        Text(
-                          "${(outputs[outputs.length-1].confidence * 100.0).toStringAsFixed(2)} %",
-                          style: TextStyle(
-                            color: _colorTween.value,
-                            fontSize: 16.0,
                           ),
                         ),
                       ],

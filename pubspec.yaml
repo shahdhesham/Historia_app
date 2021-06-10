@@ -77,7 +77,6 @@ flutter:
   assets:
     - images/
     - assets/Egypt_label.txt
-    
     - assets/SEgypt.tflite
     - assets/Egypt.tflite
    

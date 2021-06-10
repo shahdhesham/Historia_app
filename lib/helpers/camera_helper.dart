@@ -37,7 +37,7 @@ class CameraHelper {
         if (isDetecting) return;
         isDetecting = true;
         try {
-          TFLiteHelper.classifyImage(image);
+          TFLiteHelper.classifyImageCamera(image);
         } catch (e) {
           print(e);
         }
