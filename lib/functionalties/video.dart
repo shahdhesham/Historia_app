@@ -190,7 +190,7 @@ class _VideoState extends State<Video> {
                           child: Text(
                             finalLabel,
                             style: TextStyle(
-                              fontFamily: 'Antens',
+                           //   fontFamily: 'Antens',
                               fontSize: 40,
                             ),
                             textAlign: TextAlign.left,
