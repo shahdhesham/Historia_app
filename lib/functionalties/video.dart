@@ -4,7 +4,7 @@ import 'package:tflite/tflite.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:export_video_frame/export_video_frame.dart';
-import 'helpers/sharedPrefrences_helper.dart';
+import '../helpers/sharedPrefrences_helper.dart';
 
 class ImageItem extends StatelessWidget {
   ImageItem({this.image}) : super(key: ObjectKey(image));
