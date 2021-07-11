@@ -42,7 +42,7 @@ class Monuments with ChangeNotifier {
     //     filterByUser ? 'orderBy="ownerId"&equalTo="$userId"' : '';
 
     var url = '$baseUrl/monuments.json';
-   // ?auth=$authToken&$filterString';
+    // ?auth=$authToken&$filterString';
     try {
       final response = await http.get(url);
       final dbData = json.decode(response.body) as Map<String, dynamic>;
@@ -115,7 +115,6 @@ class Monuments with ChangeNotifier {
           'Ltd': monument.latitude,
         }),
       );
-      print("i am here");
 
       final newMonument = Monument(
           monumentName: monument.monumentName,
