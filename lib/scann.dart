@@ -40,25 +40,26 @@ class _DetectScreenPageState extends State<DetectScreen>
     _setupAnimation();
 
     //Subscribe to TFLite's Classify events
-    TFLiteHelper.tfLiteResultsController.stream.listen((value) {
-      value.forEach((element) {
-        _colorAnimController.animateTo(element.confidence,
-            curve: Curves.bounceIn, duration: Duration(milliseconds: 500));
-      });
+    TFLiteHelper.tfLiteResultsController.stream.listen(
+        (value) {
+          value.forEach((element) {
+            _colorAnimController.animateTo(element.confidence,
+                curve: Curves.bounceIn, duration: Duration(milliseconds: 500));
+          });
 
-      //Set Results
-      outputs = value;
+          //Set Results
+          outputs = value;
 
-      //Update results on screen
-      setState(() {
-        //Set bit to false to allow detection again
-        CameraHelper.isDetecting = false;
-      });
-    }, onDone: () {
-
-    }, onError: (error) {
-      AppHelper.log("listen", error);
-    });
+          //Update results on screen
+          setState(() {
+            //Set bit to false to allow detection again
+            CameraHelper.isDetecting = false;
+          });
+        },
+        onDone: () {},
+        onError: (error) {
+          AppHelper.log("listen", error);
+        });
   }
 
   @override
@@ -104,7 +105,9 @@ class _DetectScreenPageState extends State<DetectScreen>
           height: 300.0,
           width: width,
           color: Colors.white,
-          child: outputs != null && outputs.isNotEmpty
+          child: outputs != null &&
+                  outputs.isNotEmpty &&
+                  outputs[outputs.length - 1].confidence > 50
               ? ListView.builder(
                   itemCount: 1,
                   shrinkWrap: true,
@@ -113,14 +116,10 @@ class _DetectScreenPageState extends State<DetectScreen>
                     return Column(
                       children: <Widget>[
                         Text(
-                          outputs[outputs.length-1].label,
-                          // style: TextStyle(
-                          //   color: _colorTween.value,
-                          //   fontSize: 20.0,
+                          outputs[outputs.length - 1].label,
                           style: TextStyle(
-                        fontFamily: 'Antens',
-                        fontSize: 40,
-                      
+                            fontFamily: 'Antens',
+                            fontSize: 40,
                           ),
                         ),
                       ],
