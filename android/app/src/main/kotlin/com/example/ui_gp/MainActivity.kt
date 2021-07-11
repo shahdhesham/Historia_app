@@ -1,4 +1,4 @@
-package com.example.ui_gp
+package my.historia
 
 import io.flutter.embedding.android.FlutterActivity
 
