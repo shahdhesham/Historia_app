@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_gp/providers/monuments.dart';
-import 'helpers/sharedPrefrences_helper.dart';
+import '../helpers/sharedPrefrences_helper.dart';
 
 class TextAudio extends StatefulWidget {
   @override

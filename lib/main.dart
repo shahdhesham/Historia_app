@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ui_gp/ForgetPassword.dart';
-import 'package:ui_gp/TextAudio.dart';
+import 'package:ui_gp/screens/ForgetPassword.dart';
+import 'package:ui_gp/functionalties/TextAudio.dart';
 import 'package:ui_gp/screens/User_home.dart';
-import 'package:ui_gp/predict.dart';
+import 'package:ui_gp/functionalties/predict.dart';
 import 'package:ui_gp/providers/auth.dart';
 import 'package:ui_gp/providers/monuments.dart';
-import 'package:ui_gp/scann.dart';
+import 'package:ui_gp/functionalties/scann.dart';
 import 'package:ui_gp/screens/admin.dart';
 import 'package:ui_gp/screens/auth_screen.dart';
 import 'package:ui_gp/screens/crudmonument.dart';
@@ -14,7 +14,7 @@ import 'package:ui_gp/screens/faq.dart';
 import 'package:ui_gp/screens/monumentDetail.dart';
 import 'package:ui_gp/screens/monumentsMenu.dart';
 import 'package:ui_gp/screens/profile.dart';
-import 'package:ui_gp/video.dart';
+import 'package:ui_gp/functionalties/video.dart';
 import 'package:ui_gp/widgets/settings.dart';
 
 void main() {

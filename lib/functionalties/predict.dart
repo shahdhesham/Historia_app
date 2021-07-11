@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
-import 'helpers/sharedPrefrences_helper.dart';
-import 'helpers/tflite_helper.dart';
+import '../helpers/sharedPrefrences_helper.dart';
+import '../helpers/tflite_helper.dart';
 
 class Predict extends StatefulWidget {
   @override
