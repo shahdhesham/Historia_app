@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:ui_gp/providers/monuments.dart';
-import 'package:ui_gp/screens/crudmonument.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ui_gp/models/monument.dart';
+import 'package:ui_gp/providers/monuments.dart';
 
 class Maps extends StatefulWidget {
-  Maps(this.monumentId);
-  final String monumentId;
+  Maps(this.monumentid);
+  final String monumentid;
 
   @override
-  _MapsState createState() => _MapsState(monumentId);
+  _MapsState createState() => _MapsState(monumentid);
 }
 
 class _MapsState extends State<Maps> {
-  _MapsState(this.storeid);
+  _MapsState(this.monumentid);
   GoogleMapController mapController;
-  final String storeid;
+  final String monumentid;
 
   final Map<String, Marker> _markers = {};
   void _onMapCreated(GoogleMapController controller) {
     final loadedMaps = Provider.of<Monuments>(
       context,
       listen: false,
-    ).findById(storeid);
+    ).findById(monumentid);
     mapController = controller;
     setState(() {
       _markers.clear();
@@ -36,6 +35,7 @@ class _MapsState extends State<Maps> {
         ),
       );
       _markers[loadedMaps.monumentName] = marker;
+      print(_markers);
     });
   }
 
@@ -44,7 +44,7 @@ class _MapsState extends State<Maps> {
     final loadedMaps = Provider.of<Monuments>(
       context,
       listen: false,
-    ).findById(storeid);
+    ).findById(monumentid);
     final _center = LatLng(loadedMaps.latitude, loadedMaps.longitude);
     return Scaffold(
         body: GoogleMap(
