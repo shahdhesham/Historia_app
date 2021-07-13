@@ -24,7 +24,7 @@ class CameraHelper {
 
     camera = CameraController(
         await _getCamera(_direction),
-        defaultTargetPlatform == TargetPlatform.iOS
+        defaultTargetPlatform == TargetPlatform.android
             ? ResolutionPreset.low
             : ResolutionPreset.high,
         enableAudio: false);

@@ -27,11 +27,11 @@ class _NearbyMapsState extends State<NearbyMaps> {
           markerId: MarkerId(s.monumentName),
           position: LatLng(s.latitude, s.longitude),
           infoWindow: InfoWindow(
-            title: s.storeTitle,
+            title: s.monumentName,
             snippet: s.location,
           ),
         );
-        _markers[s.storeTitle] = marker;
+        _markers[s.monumentName] = marker;
       }
     });
   }
@@ -44,13 +44,24 @@ class _NearbyMapsState extends State<NearbyMaps> {
     ).returnAll;
 
     return Scaffold(
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          title: Text(
+            "Nearby Monuments",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.black,
+          centerTitle: true,
+        ),
         body: GoogleMap(
-      onMapCreated: _onMapCreated,
-      initialCameraPosition: CameraPosition(
-        target: LatLng(30.03333, 31.23334),
-        zoom: 7.0,
-      ),
-      markers: _markers.values.toSet(),
-    ));
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: LatLng(30.03333, 31.23334),
+            zoom: 11.0,
+          ),
+          markers: _markers.values.toSet(),
+        ));
   }
 }

@@ -13,7 +13,7 @@ class Predict extends StatefulWidget {
 
 class _PredictState extends State<Predict> {
   File _image;
-
+  bool isset = false;
   double _imageWidth;
   double _imageHeight;
   var _recognitions;
@@ -44,6 +44,7 @@ class _PredictState extends State<Predict> {
 
     setState(() {
       _recognitions = recognitions;
+      isset = true;
     });
 
     String name = (_recognitions[0]['label'].toString().toUpperCase());
@@ -207,32 +208,32 @@ class _PredictState extends State<Predict> {
                 ),
               ],
             ),
-            Row(children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 120),
-                    child:
-                     Container(
-                      child: FlatButton.icon(
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'TextAudio');
-                        },
-                        icon: Icon(
-                          Icons.lightbulb_outline,
-                          color: Colors.black,
-                          size: 30,
+            if (isset)
+              Row(children: <Widget>[
+                Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 120),
+                      child: Container(
+                        child: FlatButton.icon(
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'nearBy');
+                          },
+                          icon: Icon(
+                            Icons.location_pin,
+                            color: Colors.black,
+                            size: 30,
+                          ),
+                          color: Color.fromRGBO(255, 228, 181, 1),
+                          label: Text(
+                            "Nearby",
+                            style: TextStyle(color: Colors.black, fontSize: 20),
+                          ),
                         ),
-                        color: Color.fromRGBO(255, 228, 181, 1),
-                        label: Text(
-                          "Learn More",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
-                        ),
+                        margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                       ),
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                    ),
-                  )),
-            ])
+                    )),
+              ])
           ],
         ));
   }
