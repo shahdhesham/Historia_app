@@ -213,30 +213,7 @@ class _PredictState extends State<Predict> {
                 Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Container(
-                        child: FlatButton.icon(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'TextAudio');
-                          },
-                          icon: Icon(
-                            Icons.lightbulb_outline_sharp,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          color: Color.fromRGBO(255, 228, 181, 1),
-                          label: Text(
-                            "Learn More",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                          ),
-                        ),
-                        margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                      ),
-                    )),
-                Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 35),
                       child: Container(
                         child: FlatButton.icon(
                           onPressed: () {
@@ -250,6 +227,29 @@ class _PredictState extends State<Predict> {
                           color: Color.fromRGBO(255, 228, 181, 1),
                           label: Text(
                             "Nearby",
+                            style: TextStyle(color: Colors.black, fontSize: 20),
+                          ),
+                        ),
+                        margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                      ),
+                    )),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Container(
+                        child: FlatButton.icon(
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'TextAudio');
+                          },
+                          icon: Icon(
+                            Icons.lightbulb_outline_sharp,
+                            color: Colors.black,
+                            size: 30,
+                          ),
+                          color: Color.fromRGBO(255, 228, 181, 1),
+                          label: Text(
+                            "Learn More",
                             style: TextStyle(color: Colors.black, fontSize: 20),
                           ),
                         ),
