@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ui_gp/providers/monuments.dart';
+import 'package:ui_gp/widgets/monument/googleMaps.dart';
 
 class MonumentDetail extends StatelessWidget {
   static const routeName = 'monument-detail';
@@ -44,7 +45,6 @@ class MonumentDetail extends StatelessWidget {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -64,27 +64,14 @@ class MonumentDetail extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(10.0),
-            //   child: Container(
-            //     child: RatingBarIndicator(
-            //       rating: loadedStore.rating,
-            //       itemBuilder: (context, index) => Icon(
-            //         Icons.star,
-            //         color: Colors.amber,
-            //       ),
-            //       itemCount: 5,
-            //       itemSize: 30.0,
-            //       direction: Axis.horizontal,
-            //     ),
-            //   ),
-            // ),
-
-            // Container(
-            //   height: 300,
-            //   width: 300,
-            //   child: Maps(loadedStore.id),
-            // ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                height: 300,
+                width: 300,
+                child: Maps(loadedMonument.id),
+              ),
+            ),
           ],
         ),
       ),
