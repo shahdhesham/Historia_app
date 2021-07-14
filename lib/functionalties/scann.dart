@@ -6,6 +6,7 @@ import 'package:ui_gp/helpers/app_helper.dart';
 import 'package:ui_gp/helpers/camera_helper.dart';
 import 'package:ui_gp/helpers/tflite_helper.dart';
 import 'package:ui_gp/models/result.dart';
+import 'package:ui_gp/widgets/monument/ar.dart';
 
 class DetectScreen extends StatefulWidget {
   DetectScreen({Key key, this.title}) : super(key: key);
@@ -65,6 +66,7 @@ class _DetectScreenPageState extends State<DetectScreen>
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -102,12 +104,12 @@ class _DetectScreenPageState extends State<DetectScreen>
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: 300.0,
+          height: MediaQuery.of(context).size.height / 2,
           width: width,
           color: Colors.white,
           child: outputs != null &&
                   outputs.isNotEmpty &&
-                  outputs[outputs.length - 1].confidence > 50
+                  outputs[outputs.length - 1].confidence > 0.7
               ? ListView.builder(
                   itemCount: 1,
                   shrinkWrap: true,
@@ -116,14 +118,13 @@ class _DetectScreenPageState extends State<DetectScreen>
                     return Column(
                       children: <Widget>[
                         Text(
-                          outputs[outputs.length-1].label,
+                          outputs[outputs.length - 1].label,
                           style: TextStyle(
-                         //   color: _colorTween.value,
-                            fontSize: 20.0,
-                        //   style: TextStyle(
-                        // fontFamily: 'Antens',
-                        // fontSize: 40,
-                      
+                            //   color: _colorTween.value,
+                            fontSize: 40.0,
+                            //   style: TextStyle(
+                            // fontFamily: 'Antens',
+                            // fontSize: 40,
                           ),
                         ),
                       ],

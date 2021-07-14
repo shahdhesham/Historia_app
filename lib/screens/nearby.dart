@@ -58,8 +58,8 @@ class _NearbyMapsState extends State<NearbyMaps> {
         body: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
-            target: LatLng(30.03333, 31.23334),
-            zoom: 11.0,
+            target: LatLng(31.257, 30.0327),
+            zoom: 15.0,
           ),
           markers: _markers.values.toSet(),
         ));
