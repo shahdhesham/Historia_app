@@ -13,10 +13,8 @@ import 'package:ui_gp/screens/crudmonument.dart';
 import 'package:ui_gp/screens/faq.dart';
 import 'package:ui_gp/screens/monumentDetail.dart';
 import 'package:ui_gp/screens/monumentsMenu.dart';
-import 'package:ui_gp/screens/nearby.dart';
 import 'package:ui_gp/screens/profile.dart';
 import 'package:ui_gp/functionalties/video.dart';
-import 'package:ui_gp/widgets/monument/ar.dart';
 import 'package:ui_gp/widgets/settings.dart';
 
 void main() {
@@ -66,7 +64,6 @@ class MyApp extends StatelessWidget {
                     'TextAudio': (context) => TextAudio(),
                     'scann': (context) =>
                         DetectScreen(title: 'Detect Monument'),
-                    'nearBy': (context) => NearbyMaps(),
                     'video': (context) => Video(images: <Image>[]),
                     'admin': (context) => AdminPage(),
                     'monuments': (context) => MonumentsMenu(),

@@ -25,7 +25,7 @@ class TFLiteHelper {
     AppHelper.log("loadModel", "Loading model..");
 
     return Tflite.loadModel(
-      model: "assets/SEgypt.tflite",
+      model: "assets/Egypt.tflite",
       labels: "assets/Egypt_label.txt",
     );
   }

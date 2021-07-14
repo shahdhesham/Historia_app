@@ -29,7 +29,6 @@ class Video extends StatefulWidget {
 class _VideoState extends State<Video> {
   static List<int> _outputs = List(4);
   var _isloading = false;
-  var isset = false;
   var finalLabel = "";
   var _isClean = false;
   void initState() {
@@ -101,6 +100,7 @@ class _VideoState extends State<Video> {
       labelPredicted = "Hanging Church";
     }
 
+    print("//////////////////");
     print(labelPredicted);
     String name = labelPredicted.toUpperCase();
     MySharedPreferences.instance.setStringValue("name", name);
@@ -110,7 +110,6 @@ class _VideoState extends State<Video> {
       _isClean = true;
       finalLabel = labelPredicted;
       _isloading = false;
-      isset = true;
     });
   }
 
@@ -191,7 +190,7 @@ class _VideoState extends State<Video> {
                           child: Text(
                             finalLabel,
                             style: TextStyle(
-                              //   fontFamily: 'Antens',
+                           //   fontFamily: 'Antens',
                               fontSize: 40,
                             ),
                             textAlign: TextAlign.left,
@@ -217,33 +216,6 @@ class _VideoState extends State<Video> {
                       ),
                       margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                     ),
-                    if (isset)
-                      Row(children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 120),
-                              child: Container(
-                                child: FlatButton.icon(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, 'nearBy');
-                                  },
-                                  icon: Icon(
-                                    Icons.location_pin,
-                                    color: Colors.black,
-                                    size: 30,
-                                  ),
-                                  color: Color.fromRGBO(255, 228, 181, 1),
-                                  label: Text(
-                                    "Nearby",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20),
-                                  ),
-                                ),
-                                margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                              ),
-                            )),
-                      ])
                   ])
           ],
         ),
